@@ -30,8 +30,7 @@ class _BankState extends State<Bank> {
                       height: size.height * 0.22,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF124C6C), Color(0xFF2378A8)],
+                          colors: [Color(0xFF124C6C), Color(0xFF2378A8)],
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft,
                         ),
@@ -57,27 +56,15 @@ class _BankState extends State<Bank> {
                               padding: EdgeInsets.only(
                                   right: 10, top: 5, left: 3, bottom: 5),
                               decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                               color: kPrimaryColor,),
+                                shape: BoxShape.circle,
+                                color: kPrimaryColor,
+                              ),
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.pop(context);
                                 },
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.white
-                                ),
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                               color: kPrimaryColor,),
-                              child: Icon(
-                                Icons.share,
-                                color: Colors.white
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: Colors.white),
                               ),
                             ),
                           ],
@@ -216,7 +203,7 @@ class _BankState extends State<Bank> {
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                       color: kPrimaryColor,
+                        color: kPrimaryColor,
                       ),
                       child: Icon(
                         Icons.call,
@@ -301,6 +288,9 @@ class _BankState extends State<Bank> {
                   ),
                 ),
                 currencies(context, size),
+                SizedBox(
+                  height: size.height * 0.02,
+                )
               ],
             ),
           ),
@@ -331,8 +321,8 @@ currencies(BuildContext context, Size size) {
   ];
   return Expanded(
     child: ListView.separated(
-      padding: EdgeInsets.only(
-        top: size.height * 0.01,
+      padding: EdgeInsets.symmetric(
+        vertical: size.height * 0.01,
       ),
       separatorBuilder: (context, index) {
         return SizedBox(
@@ -372,8 +362,9 @@ currencies(BuildContext context, Size size) {
               Container(
                   height: size.height * 0.06,
                   width: size.width * 0.21,
-                 decoration: BoxDecoration(
-                  color: kPrimaryColor,),
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                  ),
                   child: Center(
                     child: Text('30.25',
                         style: TextStyle(
@@ -386,7 +377,7 @@ currencies(BuildContext context, Size size) {
                 height: size.height * 0.06,
                 width: size.width * 0.21,
                 decoration: BoxDecoration(
-                   color: kPrimaryColor,
+                    color: kPrimaryColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         bottomLeft: Radius.circular(25))),

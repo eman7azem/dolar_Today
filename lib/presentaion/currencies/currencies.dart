@@ -1,6 +1,7 @@
 import 'package:dolar_today/constants/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../constants/colors.dart';
 import '../bank/bank.dart';
@@ -158,7 +159,13 @@ class _CurrenciesState extends State<Currencies> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          navigateTo(context, Bank());
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Bank(),
+                            withNavBar: false,
+                            pageTransitionAnimation:
+                            PageTransitionAnimation.slideRight,
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),
@@ -184,7 +191,7 @@ class _CurrenciesState extends State<Currencies> {
                                   height: size.height * 0.02,
                                 ),
                               ),
-                              Expanded(
+                              Expanded(flex: 2,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [

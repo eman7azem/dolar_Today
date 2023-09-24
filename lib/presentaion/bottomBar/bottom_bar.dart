@@ -31,22 +31,25 @@ class _BottomBarState extends State<BottomBar> {
           inactiveIcon: Icon(
             Icons.attach_money,
             color: Colors.white,
+            size: 30,
+
           ),
           title: ' العملات',
           activeColorPrimary: Colors.white.withOpacity(0.1),
           activeColorSecondary: Colors.white,
           textStyle: TextStyle(
             color: kPrimaryColor,
-            fontSize: 16,
+            fontSize: 18,
             fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
         ),
         PersistentBottomNavBarItem(
-          icon: Image.asset('assets/images/bar_gold.png',width: 25,),
-          inactiveIcon: Image.asset(
-            'assets/images/gold_bar.png',
-            width: 30,
+          icon: Icon(Icons.diamond, color: Colors.white),
+          inactiveIcon: Icon(
+            Icons.diamond,
+            color: Colors.white,
+            size: 30,
           ),
           title: ' الذهب',
 
@@ -54,25 +57,27 @@ class _BottomBarState extends State<BottomBar> {
           activeColorSecondary: Colors.white, //           contentPadding: 0,
           textStyle: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 18,
             fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
         ),
         PersistentBottomNavBarItem(
-          icon: Icon(Icons.favorite, color: Colors.white),
+          icon: Icon(Icons.edit_document, color: Colors.white),
           inactiveIcon: Icon(
-            Icons.golf_course,
+            Icons.edit_document,
             color: Colors.white,
+            size: 30,
+
           ),
           title: ' المدونه',
           activeColorPrimary: Colors.white.withOpacity(0.1),
           activeColorSecondary: Colors.white, //           contentPadding: 0,
           textStyle: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 18,
             fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
         ),
 

@@ -41,17 +41,17 @@ class _GoldState extends State<Gold> {
           appBar: AppBar(
             leading: Container(
               margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color:kPrimaryColor),
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, color: kPrimaryColor),
               child: Image.asset(
                 'assets/images/bar_gold.png',
               ),
             ),
             title: Text(
               'اسعار الذهب',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 20),
             ),
-            elevation: 2,
+            elevation: 4,
             // actions: [
             //   GestureDetector(
             //     onTap: () {
@@ -90,15 +90,16 @@ class _GoldState extends State<Gold> {
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.04,
-                      ),
+                    horizontal: size.width * 0.04,
+                  ),
                   child: GridView.builder(
                     itemCount: goldImage.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1, // 6 columns
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
-                      childAspectRatio: 2.5, // Adjust this ratio according to your Container's size
+                      childAspectRatio:
+                          2.5, // Adjust this ratio according to your Container's size
                     ),
                     itemBuilder: (context, index) {
                       return Container(
@@ -131,29 +132,20 @@ class _GoldState extends State<Gold> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-
                                     children: [
                                       Text(
-                                        'شراء',
+                                        'ج.م',
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '30.5',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize:
-                                                  20, // Set an initial font size
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_upward_sharp,
-                                            color: Color(0xff3ea04d),
-                                          )
-                                        ],
+                                      Text(
+                                        '30.5',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize:
+                                              20, // Set an initial font size
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -164,28 +156,19 @@ class _GoldState extends State<Gold> {
                                         fontSize: 18),
                                   ),
                                   Column(
-
                                     children: [
                                       Text(
-                                        'بيع',
+                                        'USD',
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '31.5',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_upward_sharp,
-                                            color: Color(0xff3ea04d),
-                                          )
-                                        ],
+                                      Text(
+                                        '31.5',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -204,250 +187,250 @@ class _GoldState extends State<Gold> {
         ));
   }
 
-  // Future<void> _showDialog(BuildContext context, Size size) async {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Directionality(
-  //         textDirection: TextDirection.rtl,
-  //         child: Dialog(
-  //           insetPadding: EdgeInsets.symmetric(horizontal: size.height*0.02, vertical: 0),
-  //           shape: RoundedRectangleBorder(
-  //             // Add this line to set border radius
-  //             borderRadius:
-  //                 BorderRadius.circular(10.0), // Set your desired radius
-  //           ),
-  //           backgroundColor: Colors.white,
-  //           child: Container(
-  //             height: size.height * 0.45,
-  //             width: double.infinity,
-  //             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 IconButton(
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                   },
-  //                   icon: Icon(
-  //                     Icons.close,
-  //                     color: Colors.grey,
-  //                   ),
-  //                 ),
-  //                 TextFormField(
-  //                   decoration: InputDecoration(
-  //                       enabledBorder: OutlineInputBorder(
-  //                         borderRadius: BorderRadius.circular(10.0),
-  //                         borderSide: BorderSide(
-  //                           color: Colors.grey.shade500,
-  //                           width: 2,
-  //                         ),
-  //                       ),
-  //                       focusedBorder: OutlineInputBorder(
-  //                         borderRadius: BorderRadius.circular(10.0),
-  //                         borderSide:
-  //                             BorderSide(color: kPrimaryColor, width: 2.5),
-  //                       ),
-  //                       labelText: 'إجمالي المبلغ المدفوع (جنيه مصري)',
-  //                       labelStyle: TextStyle(
-  //                           color: Colors.grey,
-  //                           fontSize: 17,
-  //                           fontWeight: FontWeight.bold)),
-  //                   // Rest of your TextFormField...
-  //                 ),
-  //                 SizedBox(height: size.height*0.01),
-  //                 Row(
-  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                   children: [
-  //                     Container(
-  //                       width: 150,
-  //                       child: TextFormField(
-  //                         decoration: InputDecoration(
-  //                             enabledBorder: OutlineInputBorder(
-  //                               borderRadius: BorderRadius.circular(10.0),
-  //                               borderSide: BorderSide(
-  //                                 color: Colors.grey.shade500,
-  //                                 width: 2,
-  //                               ),
-  //                             ),
-  //                             focusedBorder: OutlineInputBorder(
-  //                               borderRadius: BorderRadius.circular(10.0),
-  //                               borderSide: BorderSide(
-  //                                   color: kPrimaryColor, width: 2.5),
-  //                             ),
-  //                             labelText: 'إجمالي الوزن بالجرام',
-  //                             labelStyle: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 17,
-  //                                 fontWeight: FontWeight.bold)),
-  //                         // Rest of your TextFormField...
-  //                       ),
-  //                     ),
-  //                     Container(
-  //                       width: 150,
-  //                       child: DropdownButtonFormField<String>(
-  //                         iconSize: 35,
-  //                         iconEnabledColor: Colors.grey.shade500,
-  //                         decoration: InputDecoration(
-  //                           label: Text(
-  //                             'العيار',
-  //                             style: TextStyle(
-  //                               color: Colors.grey.shade500,
-  //                               fontSize: 18,
-  //                               fontWeight: FontWeight.bold,
-  //                             ),
-  //                           ),
-  //                           contentPadding: EdgeInsets.symmetric(
-  //                               vertical: size.height * 0.014,
-  //                               horizontal: size.width * 0.02),
-  //                           border: OutlineInputBorder(
-  //                             borderRadius: BorderRadius.circular(8),
-  //                             borderSide: BorderSide(
-  //                               color: Colors.grey.shade500,
-  //                               width: 2,
-  //                             ),
-  //                           ),
-  //                           enabledBorder: OutlineInputBorder(
-  //                             borderRadius: BorderRadius.circular(8),
-  //                             borderSide: BorderSide(
-  //                               color: Colors.grey.shade500,
-  //                               width: 2,
-  //                             ),
-  //                           ),
-  //                           focusedBorder: OutlineInputBorder(
-  //                             borderRadius: BorderRadius.circular(8),
-  //                             borderSide: BorderSide(
-  //                               color: kPrimaryColor,
-  //                               width: 2,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                         items: [
-  //                           DropdownMenuItem<String>(
-  //                             alignment: Alignment.centerRight,
-  //                             value: 'option1',
-  //                             child: Text(
-  //                               '10',
-  //                               style: TextStyle(
-  //                                 color: Colors.black87,
-  //                                 fontSize: 18,
-  //                                 fontWeight: FontWeight.w400,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           DropdownMenuItem<String>(
-  //                             alignment: Alignment.centerRight,
-  //                             value: 'option2',
-  //                             child: Text(
-  //                               '14',
-  //                               style: TextStyle(
-  //                                 color: Colors.black87,
-  //                                 fontSize: 18,
-  //                                 fontWeight: FontWeight.w400,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           DropdownMenuItem<String>(
-  //                             alignment: Alignment.centerRight,
-  //                             value: 'option3',
-  //                             child: Text(
-  //                               '18',
-  //                               style: TextStyle(
-  //                                 color: Colors.black87,
-  //                                 fontSize: 18,
-  //                                 fontWeight: FontWeight.w400,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           DropdownMenuItem<String>(
-  //                             alignment: Alignment.centerRight,
-  //                             value: 'option4',
-  //                             child: Text(
-  //                               '21',
-  //                               style: TextStyle(
-  //                                 color: Colors.black87,
-  //                                 fontSize: 18,
-  //                                 fontWeight: FontWeight.w400,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           DropdownMenuItem<String>(
-  //                             alignment: Alignment.centerRight,
-  //                             value: 'option5',
-  //                             child: Text(
-  //                               '24',
-  //                               style: TextStyle(
-  //                                 color: Colors.black87,
-  //                                 fontSize: 18,
-  //                                 fontWeight: FontWeight.w400,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                         onChanged: (value) {
-  //                           // Handle dropdown value change
-  //                         },
-  //                         validator: (value) {
-  //                           if (value == null || value.isEmpty) {
-  //                             return 'يرجى اختيار العيار';
-  //                           }
-  //                           return null; // Return null if validation passes
-  //                         },
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 SizedBox(height: size.height * 0.03),
-  //                 Center(
-  //                   child: Container(
-  //                     width: size.width * 0.5,
-  //                     height: size.height*0.05,
-  //                     decoration: ShapeDecoration(
-  //                       color: kPrimaryColor,
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(5),
-  //                       ),
-  //                     ),
-  //                     child: Center(
-  //                       child: Text(
-  //                         'حساب مصنعيه الذهب',
-  //                         style: TextStyle(
-  //                           color: Colors.black,
-  //                           fontSize: 20,
-  //                           fontWeight: FontWeight.w600,
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 SizedBox(height: size.height * 0.02),
-  //                 Container(
-  //                   width: double.infinity,
-  //                   height: size.height*0.055,
-  //                   decoration: ShapeDecoration(
-  //                     color: kPrimaryColor,
-  //                     shape: RoundedRectangleBorder(
-  //                       borderRadius: BorderRadius.circular(5),
-  //                     ),
-  //                   ),
-  //                   child: Center(
-  //                     child: Text(
-  //                       'مصنعية 8 جرام ذهب 2560 جنيه مصري',
-  //                       style: TextStyle(
-  //                         color: Colors.black,
-  //                         fontSize: 20,
-  //                         fontFamily: 'Ah-moharram-bold',
-  //                         fontWeight: FontWeight.w500,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+// Future<void> _showDialog(BuildContext context, Size size) async {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return Directionality(
+//         textDirection: TextDirection.rtl,
+//         child: Dialog(
+//           insetPadding: EdgeInsets.symmetric(horizontal: size.height*0.02, vertical: 0),
+//           shape: RoundedRectangleBorder(
+//             // Add this line to set border radius
+//             borderRadius:
+//                 BorderRadius.circular(10.0), // Set your desired radius
+//           ),
+//           backgroundColor: Colors.white,
+//           child: Container(
+//             height: size.height * 0.45,
+//             width: double.infinity,
+//             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 IconButton(
+//                   onPressed: () {
+//                     Navigator.of(context).pop();
+//                   },
+//                   icon: Icon(
+//                     Icons.close,
+//                     color: Colors.grey,
+//                   ),
+//                 ),
+//                 TextFormField(
+//                   decoration: InputDecoration(
+//                       enabledBorder: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(10.0),
+//                         borderSide: BorderSide(
+//                           color: Colors.grey.shade500,
+//                           width: 2,
+//                         ),
+//                       ),
+//                       focusedBorder: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(10.0),
+//                         borderSide:
+//                             BorderSide(color: kPrimaryColor, width: 2.5),
+//                       ),
+//                       labelText: 'إجمالي المبلغ المدفوع (جنيه مصري)',
+//                       labelStyle: TextStyle(
+//                           color: Colors.grey,
+//                           fontSize: 17,
+//                           fontWeight: FontWeight.bold)),
+//                   // Rest of your TextFormField...
+//                 ),
+//                 SizedBox(height: size.height*0.01),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Container(
+//                       width: 150,
+//                       child: TextFormField(
+//                         decoration: InputDecoration(
+//                             enabledBorder: OutlineInputBorder(
+//                               borderRadius: BorderRadius.circular(10.0),
+//                               borderSide: BorderSide(
+//                                 color: Colors.grey.shade500,
+//                                 width: 2,
+//                               ),
+//                             ),
+//                             focusedBorder: OutlineInputBorder(
+//                               borderRadius: BorderRadius.circular(10.0),
+//                               borderSide: BorderSide(
+//                                   color: kPrimaryColor, width: 2.5),
+//                             ),
+//                             labelText: 'إجمالي الوزن بالجرام',
+//                             labelStyle: TextStyle(
+//                                 color: Colors.grey,
+//                                 fontSize: 17,
+//                                 fontWeight: FontWeight.bold)),
+//                         // Rest of your TextFormField...
+//                       ),
+//                     ),
+//                     Container(
+//                       width: 150,
+//                       child: DropdownButtonFormField<String>(
+//                         iconSize: 35,
+//                         iconEnabledColor: Colors.grey.shade500,
+//                         decoration: InputDecoration(
+//                           label: Text(
+//                             'العيار',
+//                             style: TextStyle(
+//                               color: Colors.grey.shade500,
+//                               fontSize: 18,
+//                               fontWeight: FontWeight.bold,
+//                             ),
+//                           ),
+//                           contentPadding: EdgeInsets.symmetric(
+//                               vertical: size.height * 0.014,
+//                               horizontal: size.width * 0.02),
+//                           border: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(8),
+//                             borderSide: BorderSide(
+//                               color: Colors.grey.shade500,
+//                               width: 2,
+//                             ),
+//                           ),
+//                           enabledBorder: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(8),
+//                             borderSide: BorderSide(
+//                               color: Colors.grey.shade500,
+//                               width: 2,
+//                             ),
+//                           ),
+//                           focusedBorder: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(8),
+//                             borderSide: BorderSide(
+//                               color: kPrimaryColor,
+//                               width: 2,
+//                             ),
+//                           ),
+//                         ),
+//                         items: [
+//                           DropdownMenuItem<String>(
+//                             alignment: Alignment.centerRight,
+//                             value: 'option1',
+//                             child: Text(
+//                               '10',
+//                               style: TextStyle(
+//                                 color: Colors.black87,
+//                                 fontSize: 18,
+//                                 fontWeight: FontWeight.w400,
+//                               ),
+//                             ),
+//                           ),
+//                           DropdownMenuItem<String>(
+//                             alignment: Alignment.centerRight,
+//                             value: 'option2',
+//                             child: Text(
+//                               '14',
+//                               style: TextStyle(
+//                                 color: Colors.black87,
+//                                 fontSize: 18,
+//                                 fontWeight: FontWeight.w400,
+//                               ),
+//                             ),
+//                           ),
+//                           DropdownMenuItem<String>(
+//                             alignment: Alignment.centerRight,
+//                             value: 'option3',
+//                             child: Text(
+//                               '18',
+//                               style: TextStyle(
+//                                 color: Colors.black87,
+//                                 fontSize: 18,
+//                                 fontWeight: FontWeight.w400,
+//                               ),
+//                             ),
+//                           ),
+//                           DropdownMenuItem<String>(
+//                             alignment: Alignment.centerRight,
+//                             value: 'option4',
+//                             child: Text(
+//                               '21',
+//                               style: TextStyle(
+//                                 color: Colors.black87,
+//                                 fontSize: 18,
+//                                 fontWeight: FontWeight.w400,
+//                               ),
+//                             ),
+//                           ),
+//                           DropdownMenuItem<String>(
+//                             alignment: Alignment.centerRight,
+//                             value: 'option5',
+//                             child: Text(
+//                               '24',
+//                               style: TextStyle(
+//                                 color: Colors.black87,
+//                                 fontSize: 18,
+//                                 fontWeight: FontWeight.w400,
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                         onChanged: (value) {
+//                           // Handle dropdown value change
+//                         },
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'يرجى اختيار العيار';
+//                           }
+//                           return null; // Return null if validation passes
+//                         },
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 SizedBox(height: size.height * 0.03),
+//                 Center(
+//                   child: Container(
+//                     width: size.width * 0.5,
+//                     height: size.height*0.05,
+//                     decoration: ShapeDecoration(
+//                       color: kPrimaryColor,
+//                       shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(5),
+//                       ),
+//                     ),
+//                     child: Center(
+//                       child: Text(
+//                         'حساب مصنعيه الذهب',
+//                         style: TextStyle(
+//                           color: Colors.black,
+//                           fontSize: 20,
+//                           fontWeight: FontWeight.w600,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: size.height * 0.02),
+//                 Container(
+//                   width: double.infinity,
+//                   height: size.height*0.055,
+//                   decoration: ShapeDecoration(
+//                     color: kPrimaryColor,
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(5),
+//                     ),
+//                   ),
+//                   child: Center(
+//                     child: Text(
+//                       'مصنعية 8 جرام ذهب 2560 جنيه مصري',
+//                       style: TextStyle(
+//                         color: Colors.black,
+//                         fontSize: 20,
+//                         fontFamily: 'Ah-moharram-bold',
+//                         fontWeight: FontWeight.w500,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 }
