@@ -55,15 +55,14 @@ class _CurrenciesState extends State<Currencies> {
               children: [
                 Text(
                   'دولار امريكي/ USD ',
-                  style: TextStyle(color: Colors.black,fontSize: 18),
+                  style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 Text(
                   'تحديث 8-مارس-2023-3:23.م',
-                  style: TextStyle(color:kPrimaryColor, fontSize: 15),
+                  style: TextStyle(color: kPrimaryColor, fontSize: 15),
                 ),
               ],
             ),
-
           ),
           body: Column(
             children: [
@@ -112,7 +111,8 @@ class _CurrenciesState extends State<Currencies> {
                         SizedBox(
                           width: size.width * 0.03,
                         ),
-                        Column(mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'بيع',
@@ -138,24 +138,28 @@ class _CurrenciesState extends State<Currencies> {
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.04,
-                     ),
+                    horizontal: size.width * 0.04,
+                  ),
                   child: GridView.builder(
                     itemCount: imagesLogo.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1, // 6 columns
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
-                      childAspectRatio: 2.5, // Adjust this ratio according to your Container's size
+                      childAspectRatio:
+                          2.5, // Adjust this ratio according to your Container's size
                     ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                         navigateTo(context, Bank());
+                          navigateTo(context, Bank());
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(top: size.width * 0.03,left: size.width*0.01,right: size.width*0.01),
+                          margin: EdgeInsets.only(
+                              top: size.width * 0.03,
+                              left: size.width * 0.01,
+                              right: size.width * 0.01),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -177,9 +181,11 @@ class _CurrenciesState extends State<Currencies> {
                                   height: size.height * 0.02,
                                 ),
                               ),
-                              Expanded(flex: 2,
+                              Expanded(
+                                flex: 2,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       children: [
