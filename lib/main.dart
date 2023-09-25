@@ -1,6 +1,6 @@
-import 'package:dolar_today/presentaion/bottomBar/bottom_bar.dart';
-import 'package:dolar_today/presentaion/currencies/currencies.dart';
 import 'package:flutter/material.dart';
+
+import 'presentaion/bottomBar/bottomBar.dart';
 
 void main() {
   runApp(const MyApp());
