@@ -90,7 +90,7 @@ class _BottomBarState extends State<BottomBar> {
                     ),
                     iconSize: 30,
                     icon: Icons.edit_document,
-                    text: 'الاخبار',
+                    text: 'الأخبار',
                     backgroundColor: Colors.white.withOpacity(0.1),
                   ),
                 ],
