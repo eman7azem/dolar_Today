@@ -85,25 +85,26 @@ class _CurrenciesState extends State<Currencies> {
                       'متوسط السعر',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 24,
                           fontWeight: FontWeight.w500),
                     ),
                     Row(
                       children: [
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'شراء',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                               ),
                             ),
                             Text(
                               '30.5 ج.م',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                               ),
                             ),
                           ],
@@ -111,20 +112,20 @@ class _CurrenciesState extends State<Currencies> {
                         SizedBox(
                           width: size.width * 0.03,
                         ),
-                        Column(
+                        Column(mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'بيع',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                               ),
                             ),
                             Text(
                               '31.5 ج.م',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                               ),
                             ),
                           ],
