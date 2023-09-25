@@ -23,7 +23,7 @@ class _BankState extends State<Bank> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: size.height * 0.31,
+                  height: size.height * 0.33,
                   child: Stack(children: [
                     Container(
                       width: double.infinity,
@@ -79,7 +79,7 @@ class _BankState extends State<Bank> {
                         padding: EdgeInsets.symmetric(
                             vertical: size.height * 0.012,
                             horizontal: size.width * 0.03),
-                        height: size.height * 0.16,
+                        height: size.height * 0.18,
                         width: size.width,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -360,14 +360,14 @@ currencies(BuildContext context, Size size) {
                         bottomRight: Radius.circular(25))),
                 child: Row(
                   children: [
-                    SvgPicture.asset(currenciesImage[index], width: 25),
+                    SvgPicture.asset(currenciesImage[index], width: 20),
                     SizedBox(
                       width: size.width * 0.02,
                     ),
                     Text(
                       'دولار امريكي USD',
                       style: TextStyle(
-                          color: Colors.white, fontSize: 18, height: 2),
+                          color: Colors.white, fontSize: 16, height: 1),
                     ),
                   ],
                 ),

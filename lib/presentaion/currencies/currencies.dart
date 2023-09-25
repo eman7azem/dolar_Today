@@ -76,7 +76,7 @@ class _CurrenciesState extends State<Currencies> {
                   ),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-                height: size.height * 0.084,
+                height: size.height * 0.1,
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,10 +91,6 @@ class _CurrenciesState extends State<Currencies> {
                     Row(
                       children: [
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // Align text to the start horizontally
-
                           children: [
                             Text(
                               'شراء',
@@ -113,13 +109,9 @@ class _CurrenciesState extends State<Currencies> {
                           ],
                         ),
                         SizedBox(
-                          width: size.width * 0.04,
+                          width: size.width * 0.03,
                         ),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // Align text to the start horizontally
-
                           children: [
                             Text(
                               'بيع',

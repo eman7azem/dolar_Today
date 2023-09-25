@@ -99,7 +99,7 @@ class _GoldState extends State<Gold> {
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
                       childAspectRatio:
-                          2.5, // Adjust this ratio according to your Container's size
+                          3.1, // Adjust this ratio according to your Container's size
                     ),
                     itemBuilder: (context, index) {
                       return Container(
@@ -121,16 +121,23 @@ class _GoldState extends State<Gold> {
                         child: Column(
                           children: [
                             Expanded(
-                              child: Image.asset(
-                                height: 35,
-                                goldImage[index],
-                              ),
-                            ),
-                            Expanded(
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        height: 35,
+                                        goldImage[index],
+                                      ),
+                                      Text(
+                                        text[index],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
                                   Column(
                                     children: [
                                       Text(
@@ -144,34 +151,12 @@ class _GoldState extends State<Gold> {
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize:
-                                              20, // Set an initial font size
+                                          20, // Set an initial font size
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    text[index],
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'USD',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Text(
-                                        '31.5',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+
                                 ],
                               ),
                             ),
