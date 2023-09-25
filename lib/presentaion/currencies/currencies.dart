@@ -31,7 +31,7 @@ class _CurrenciesState extends State<Currencies> {
     'بنك QNB',
     'البنك المركزي المصري',
     'بنك الاسكندريه',
-    'البنك الاهلي المصري',
+    'البنك الاهلي الدولي',
   ];
 
   bool isLike = false;
@@ -154,7 +154,7 @@ class _CurrenciesState extends State<Currencies> {
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(top: size.width * 0.03),
+                          margin: EdgeInsets.only(top: size.width * 0.03,left: size.width*0.01,right: size.width*0.01),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
