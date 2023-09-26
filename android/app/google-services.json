@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "258976016033",
+    "project_id": "prices-c0394",
+    "storage_bucket": "prices-c0394.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258976016033:android:f7638d81337354672132e0",
+        "android_client_info": {
+          "package_name": "com.example.dolar_today"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2vtzMupIu15r5cHdSsSm5t_6ClTIQIMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
