@@ -104,7 +104,7 @@ class _GoldState extends State<Gold> {
                     itemBuilder: (context, index) {
                       return Container(
                         padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(top: size.width * 0.03),
+                        margin: EdgeInsets.only(top: size.width * 0.03,left: size.width*0.01,right: size.width*0.01),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
