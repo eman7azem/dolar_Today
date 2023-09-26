@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'سعر الدولار اليوم في السوق السودا',
       theme: ThemeData(
         appBarTheme: AppBarTheme(backgroundColor: Colors.white)
       ),

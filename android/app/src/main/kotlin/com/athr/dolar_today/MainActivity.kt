@@ -1,4 +1,4 @@
-package com.example.dolar_today
+package com.athr.dolar_today
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:258976016033:android:f7638d81337354672132e0",
+        "mobilesdk_app_id": "1:258976016033:android:01045817527893e12132e0",
         "android_client_info": {
-          "package_name": "com.example.dolar_today"
+          "package_name": "com.athr.dolar_today"
         }
       },
       "oauth_client": [],

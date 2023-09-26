@@ -2,7 +2,6 @@ import 'package:dolar_today/utils/date_time.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../API/api.dart';
 import '../../models/currency.dart';
 import '../../models/currency_data.dart';

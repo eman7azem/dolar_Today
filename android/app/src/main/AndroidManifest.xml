@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="dolar_today"
+        android:label="سعر الدولار اليوم في السوق السودا"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
