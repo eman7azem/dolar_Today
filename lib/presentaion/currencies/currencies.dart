@@ -20,7 +20,7 @@ class _CurrenciesState extends State<Currencies> {
     'assets/images/black_souq.png',
     'assets/images/bank_alahly.png',
     'assets/images/bank_msr.png',
-    'assets/images/Cib_Logo.svg.png',
+    'assets/images/cib.png',
     'assets/images/bank_qnb.png',
     'assets/images/bank_CoE.png',
     'assets/images/bank_alex.jpg',
@@ -60,10 +60,6 @@ class _CurrenciesState extends State<Currencies> {
                 Text(
                   'دولار امريكي/ USD ',
                   style: TextStyle(color: Colors.black, fontSize: 18),
-                ),
-                Text(
-                  'تحديث 8-مارس-2023-3:23.م',
-                  style: TextStyle(color: kPrimaryColor, fontSize: 15),
                 ),
               ],
             ),
@@ -170,7 +166,7 @@ class _CurrenciesState extends State<Currencies> {
                               Bank bank= bankData.banks[index];
                               return GestureDetector(
                                 onTap: () {
-                                  navigateTo(context, BankPage( id: bank.id,));
+                                  navigateTo(context, BankPage( id: bank.id, ));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(10),

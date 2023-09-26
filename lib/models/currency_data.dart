@@ -26,8 +26,8 @@ class CurrencyData {
       bank: BankInform.fromJson(json['bank']),
       currencies: currencies,
       lastUpdate: json['last_update'] != null ? DateTime.parse(json['last_update']) : null,
-      bankPrice:json['bankPrice'],
-      blackPrice:json['blackPrice'],
+      bankPrice:json['bank_price'],
+      blackPrice:json['black_price'],
     );
   }
 }
