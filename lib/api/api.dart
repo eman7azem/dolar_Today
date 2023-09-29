@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:dolar_today/models/bank_data.dart';
 import 'package:dolar_today/models/bank_information.dart';
+import 'package:dolar_today/models/gold.dart';
 
+import '../models/blog.dart';
 import '../models/currency_data.dart';
 
 class API {
@@ -47,4 +49,42 @@ class API {
     return data;
   }
 
+  Future<List<BlogModel>> blogs() async {
+    final url = '$baseUrl/blogs';
+    List<BlogModel> data = [];
+    try {
+      final dio = Dio();
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        final res = response.data as List<dynamic>;
+        data = res.map((json) => BlogModel.fromJson(json)).toList();
+      } else {
+        //print("========== ${response.statusCode}");
+      }
+    } catch (e, stackTrace) {
+      print('========== Error: $e');
+      print('========== Error Stack Trace: $stackTrace');
+    }
+    return data;
+  }
+
+  Future<List<GoldModel>> golds() async {
+    final url = '$baseUrl/golds';
+    List<GoldModel> data = [];
+    try {
+      final dio = Dio();
+
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        final res = response.data as List<dynamic>;
+        data = res.map((json) => GoldModel.fromJson(json)).toList();
+      } else {
+        //print("========== ${response.statusCode}");
+      }
+    } catch (e, stackTrace) {
+      print('========== Error: $e');
+      print('========== Error Stack Trace: $stackTrace');
+    }
+    return data;
+  }
 }

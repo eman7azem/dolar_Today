@@ -1,6 +1,8 @@
+import 'package:dolar_today/models/blog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../API/api.dart';
 import '../../constants/colors.dart';
 
 class Blog extends StatelessWidget {
@@ -10,20 +12,23 @@ class Blog extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('dd/MM/yyyy').format(now);
+    final _api = API();
+
     return Scaffold(
       appBar: AppBar(
         leading: Container(
-          margin: EdgeInsets.all(5),
-          decoration:
-          BoxDecoration(shape: BoxShape.circle, color: kPrimaryColor),
-          child:Icon(Icons.edit_document,color: Colors.white,)
-        ),
+            margin: EdgeInsets.all(5),
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: kPrimaryColor),
+            child: Icon(
+              Icons.edit_document,
+              color: Colors.white,
+            )),
 
         title: Text(
           'الأخبار',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 20),
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
         ),
         elevation: 4,
         // actions: [
@@ -59,59 +64,70 @@ class Blog extends StatelessWidget {
         //   )
         // ],
       ),
-
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(padding: EdgeInsets.only(top: size.height*0.02),
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.04,
-                      vertical: size.height * 0.01),
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      borderSide: BorderSide(color: Colors.transparent)),
-                  elevation: 15.0, // Set the elevation to 10
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.only(
-                        //       topRight: Radius.circular(15),
-                        //       topLeft: Radius.circular(15)),
-                        //   child: Image.asset(
-                        //     'assets/images/blog.jpg',
-                        //     // Replace with your image path
-                        //     fit: BoxFit.cover, // Adjust the image fit
-                        //   ),
-                        // ),
-                        Text(
-                          'تراجعت أسعار الذهب، ، مع احتفاظ الدولار بقوته بعد أن ألمح مسؤولون في مجلس الاحتياطي الفيدرالي الأميركي، إلى استمرار رفع أسعار الفائدة لفترة أطول، لكن التحركات كانت محدودة مع ترقب المستثمرين بيانات التضخم التي ستصدر هذا الأسبوع.',
-                          style: TextStyle(
-                            fontSize: 14.0,
+      body: FutureBuilder(
+          future: _api.blogs(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              List<BlogModel> blogs = snapshot.data;
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.only(top: size.height * 0.02),
+                      itemCount: blogs.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.04,
+                              vertical: size.height * 0.01),
+                          shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderSide: BorderSide(color: Colors.transparent)),
+                          elevation: 15.0, // Set the elevation to 10
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                // ClipRRect(
+                                //   borderRadius: BorderRadius.only(
+                                //       topRight: Radius.circular(15),
+                                //       topLeft: Radius.circular(15)),
+                                //   child: Image.asset(
+                                //     'assets/images/blog.jpg',
+                                //     // Replace with your image path
+                                //     fit: BoxFit.cover, // Adjust the image fit
+                                //   ),
+                                // ),
+                                Text(
+                                  blogs[index].text,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                                Text(
+                                  blogs[index].date,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text(
-                          ' $formattedDate',
-                          style: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                        ),
-
-                      ],
+                        );
+                      },
                     ),
                   ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
+                ],
+              );
+            }
+          }),
     );
   }
 }

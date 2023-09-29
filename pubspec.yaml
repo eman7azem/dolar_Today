@@ -48,6 +48,7 @@ dev_dependencies:
   firebase_core: ^2.16.0
   firebase_messaging: ^14.6.8
   dio: ^5.3.3
+  google_mobile_ads: ^3.0.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
