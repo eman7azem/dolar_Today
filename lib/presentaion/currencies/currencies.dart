@@ -17,12 +17,10 @@ class Currencies extends StatefulWidget {
 }
 
 class _CurrenciesState extends State<Currencies> {
-  BannerAd? _bannerAd;
 
   @override
   void initState() {
     super.initState();
-    _createBannerId();
   }
 
   List<String> imagesLogo = [
@@ -72,11 +70,6 @@ class _CurrenciesState extends State<Currencies> {
                     if (bankData != null) {
                       return Column(
                         children: [
-                          _bannerAd == null
-                              ? Container()
-                              : Container(
-                                  height: _bannerAd!.size.height.toDouble(),
-                                  child: AdWidget(ad: _bannerAd!)),
                           Container(
                             height: size.height * 0.08,
                             width: double.infinity,
@@ -245,14 +238,5 @@ class _CurrenciesState extends State<Currencies> {
                 }),
           ),
         ));
-  }
-
-  void _createBannerId() {
-    _bannerAd = BannerAd(
-        adUnitId: AdMobService.bannerAdUnitId,
-        request: const AdRequest(),
-        size: AdSize.largeBanner,
-        listener: AdMobService.bannerAdListener)
-      ..load();
   }
 }

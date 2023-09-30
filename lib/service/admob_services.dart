@@ -6,11 +6,11 @@ class AdMobService {
   static String get bannerAdUnitId {
     return 'ca-app-pub-6848148437732539/6108903961';
   }
-  static String get interstitialAdUnitId {
-    return 'ca-app-pub-6848148437732539/1632788126';
-  }
+  // static String get interstitialAdUnitId {
+  //   return 'ca-app-pub-6848148437732539/1632788126';
+  // }
   static String get rewardAdUnitId {
-    return 'ca-app-pub-3940256099942544/5224354917';
+    return 'ca-app-pub-6848148437732539/6492047349';
   }
 
   static final BannerAdListener bannerAdListener = BannerAdListener(

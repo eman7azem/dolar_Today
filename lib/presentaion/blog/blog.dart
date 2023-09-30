@@ -20,7 +20,6 @@ class _BlogState extends State<Blog> {
   @override
   void initState() {
     super.initState();
-    _createBannerId();
   }
 
 
@@ -61,12 +60,6 @@ class _BlogState extends State<Blog> {
                 children: [
                   SizedBox(
                     height: 10,
-                  ),
-                  _bannerAd == null ? Container() :
-                  Container(
-                    height: _bannerAd?.size.height.toDouble(),
-                    width: size.width*0.8,
-                    child: AdWidget(ad: _bannerAd!),
                   ),
                   Expanded(
                     child: ListView.builder(
@@ -120,13 +113,5 @@ class _BlogState extends State<Blog> {
             }
           }),
     );
-  }
-  void _createBannerId() {
-    _bannerAd = BannerAd(
-        adUnitId: AdMobService.bannerAdUnitId,
-        request: const AdRequest(),
-        size: AdSize.largeBanner,
-        listener: AdMobService.bannerAdListener
-    )..load();
   }
 }

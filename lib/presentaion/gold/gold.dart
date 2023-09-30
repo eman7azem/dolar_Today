@@ -36,11 +36,9 @@ class _GoldState extends State<Gold> {
 
   final _api = API();
 
-  BannerAd? _bannerAd;
   @override
   void initState() {
     super.initState();
-    _createBannerId();
   }
 
 
@@ -92,11 +90,6 @@ class _GoldState extends State<Gold> {
                               ),
                             ],
                           ),
-                        ),
-                        _bannerAd == null ? Container() :
-                        Container(
-                          height: _bannerAd?.size.height.toDouble(),
-                          child: AdWidget(ad: _bannerAd!),
                         ),
                         Expanded(
                           child: Container(
@@ -188,14 +181,5 @@ class _GoldState extends State<Gold> {
                 }),
           ),
         ));
-  }
-
-  void _createBannerId() {
-    _bannerAd = BannerAd(
-      adUnitId: AdMobService.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.largeBanner,
-      listener: AdMobService.bannerAdListener
-    )..load();
   }
 }
