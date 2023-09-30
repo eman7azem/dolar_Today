@@ -12,15 +12,13 @@ import '../../service/admob_services.dart';
 class Currencies extends StatefulWidget {
   const Currencies({super.key});
 
-
-
   @override
   State<Currencies> createState() => _CurrenciesState();
 }
 
 class _CurrenciesState extends State<Currencies> {
-
   BannerAd? _bannerAd;
+
   @override
   void initState() {
     super.initState();
@@ -61,7 +59,8 @@ class _CurrenciesState extends State<Currencies> {
           body: SafeArea(
             child: FutureBuilder(
                 future: _api.banks(),
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
@@ -69,37 +68,41 @@ class _CurrenciesState extends State<Currencies> {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   } else {
-                    BankData? bankData=snapshot.data;
-                    if(bankData!= null){
-
+                    BankData? bankData = snapshot.data;
+                    if (bankData != null) {
                       return Column(
                         children: [
+                          _bannerAd == null
+                              ? Container()
+                              : Container(
+                                  height: _bannerAd?.size.height.toDouble(),
+                                  child: AdWidget(ad: _bannerAd!)),
                           Container(
                             height: size.height * 0.08,
+                            width: double.infinity,
+                            margin: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.05),
                             child: Row(
                               //crossAxisAlignment: CrossAxisAlignment.center, // Align children vertically in the middle
                               children: [
                                 SizedBox(
-                                  height: size.height * 0.05,
+                                  height: size.height * 0.08,
+                                  width: size.width * 0.08,
                                   child: SvgPicture.asset(
                                     'assets/images/flag_america.svg',
                                   ),
                                 ),
-                                SizedBox(width: 8), // Adjust the spacing as needed
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center, // Vertically center the text
-                                  children: [
-                                    Text(
-                                      'دولار امريكي/ USD ',
-                                      style: TextStyle(color: Colors.black, fontSize: 18),
-                                    ),
-                                  ],
+                                SizedBox(
+                                  width: size.width * 0.03,
+                                ),
+                                Text(
+                                  'دولار امريكي/ USD ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
                                 ),
                               ],
                             ),
                           ),
-
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.symmetric(
@@ -108,18 +111,22 @@ class _CurrenciesState extends State<Currencies> {
                               child: GridView.builder(
                                 itemCount: bankData.banks.length,
                                 gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 1, // 6 columns
                                   crossAxisSpacing: 5,
                                   mainAxisSpacing: 5,
                                   childAspectRatio:
-                                  2.5, // Adjust this ratio according to your Container's size
+                                      2.5, // Adjust this ratio according to your Container's size
                                 ),
                                 itemBuilder: (context, index) {
-                                  Bank bank= bankData.banks[index];
+                                  Bank bank = bankData.banks[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      navigateTo(context, BankPage( id: bank.id, ));
+                                      navigateTo(
+                                          context,
+                                          BankPage(
+                                            id: bank.id,
+                                          ));
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(10),
@@ -152,7 +159,8 @@ class _CurrenciesState extends State<Currencies> {
                                             flex: 2,
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Column(
                                                   children: [
@@ -169,12 +177,14 @@ class _CurrenciesState extends State<Currencies> {
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                            18, // Set an initial font size
+                                                                18, // Set an initial font size
                                                           ),
                                                         ),
                                                         Icon(
-                                                          Icons.arrow_upward_sharp,
-                                                          color: Color(0xff3ea04d),
+                                                          Icons
+                                                              .arrow_upward_sharp,
+                                                          color:
+                                                              Color(0xff3ea04d),
                                                         )
                                                       ],
                                                     ),
@@ -183,7 +193,8 @@ class _CurrenciesState extends State<Currencies> {
                                                 Text(
                                                   '${bank.name}',
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       fontSize: 18,
                                                       height: 2),
                                                 ),
@@ -205,8 +216,10 @@ class _CurrenciesState extends State<Currencies> {
                                                           ),
                                                         ),
                                                         Icon(
-                                                          Icons.arrow_upward_sharp,
-                                                          color: Color(0xff3ea04d),
+                                                          Icons
+                                                              .arrow_upward_sharp,
+                                                          color:
+                                                              Color(0xff3ea04d),
                                                         )
                                                       ],
                                                     ),
@@ -226,18 +239,20 @@ class _CurrenciesState extends State<Currencies> {
                         ],
                       );
                     }
-                    return Center(child: Text('يوجد خطأ في الإتصال اتصال بالانترنت'));
+                    return Center(
+                        child: Text('يوجد خطأ في الإتصال اتصال بالانترنت'));
                   }
                 }),
           ),
         ));
   }
+
   void _createBannerId() {
     _bannerAd = BannerAd(
         adUnitId: AdMobService.bannerAdUnitId,
         request: const AdRequest(),
         size: AdSize.largeBanner,
-        listener: AdMobService.bannerAdListener
-    )..load();
+        listener: AdMobService.bannerAdListener)
+      ..load();
   }
 }

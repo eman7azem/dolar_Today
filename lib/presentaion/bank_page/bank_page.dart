@@ -77,14 +77,6 @@ class _BankPageState extends State<BankPage> {
                                     end: Alignment.centerLeft,
                                   ),
                                 ),
-                                // child: Center(
-                                //     child: Text(
-                                //       'Black Market',
-                                //       style: TextStyle(
-                                //           color: Colors.black,
-                                //           fontSize: 20,
-                                //           fontWeight: FontWeight.w700),
-                                //     )),
                               ),
                               Positioned(
                                 top: size.height * 0.03,
@@ -189,97 +181,105 @@ class _BankPageState extends State<BankPage> {
                           SizedBox(
                             height: size.height * 0.03,
                           ),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 5,
-                          ),
-                          hotlineWidget(size, currencyData),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 5,
-                          ),
-                          SizedBox(
-                            height: size.height * 0.02,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.03),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                'الاسعار تختلف حسب المحافظه والوقت ومحل الصرافة وحتى حسب التفاوض. السعر المعروض هو معدل متوسط نحسبه من اكثر من مكان',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: size.height * 0.02,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.03),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: size.width * 0.05),
-                                  height: size.height * 0.06,
-                                  width: size.width * 0.48,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF062A37),
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(25),
-                                          bottomRight: Radius.circular(25))),
+                                Divider(
+                                  color: Colors.grey.shade300,
+                                  thickness: 5,
+                                ),
+                                hotlineWidget(size, currencyData),
+                                Divider(
+                                  color: Colors.grey.shade300,
+                                  thickness: 5,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: size.width * 0.03),
+                                child: SizedBox(
+                                  width: double.infinity,
                                   child: Text(
-                                    'العملة',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        height: 2),
+                                    'الاسعار تختلف حسب المحافظه والوقت ومحل الصرافة وحتى حسب التفاوض. السعر المعروض هو معدل متوسط نحسبه من اكثر من مكان',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.03),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.05),
+                                        height: size.height * 0.06,
+                                        width: size.width * 0.48,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFF062A37),
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(25),
+                                                bottomRight: Radius.circular(25))),
+                                        child: Text(
+                                          'العملة',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                              height: 2),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: size.height * 0.06,
+                                        width: size.width * 0.21,
+                                        color: Color(0xFF062A37),
+                                        child: Center(
+                                          child: Text(
+                                            'شراء',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                height: 2),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: size.height * 0.06,
+                                        width: size.width * 0.21,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFF062A37),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(25),
+                                                bottomLeft: Radius.circular(25))),
+                                        child: Center(
+                                          child: Text(
+                                            'بيع',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                height: 2),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Container(
-                                  height: size.height * 0.06,
-                                  width: size.width * 0.21,
-                                  color: Color(0xFF062A37),
-                                  child: Center(
-                                    child: Text(
-                                      'شراء',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          height: 2),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: size.height * 0.06,
-                                  width: size.width * 0.21,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF062A37),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(25),
-                                          bottomLeft: Radius.circular(25))),
-                                  child: Center(
-                                    child: Text(
-                                      'بيع',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          height: 2),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                  height: size.height*0.32,
+                                  child: currencies(context, size, currencyData),),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                )],
                             ),
-                          ),
-                          currencies(context, size, currencyData),
-                          SizedBox(
-                            height: size.height * 0.02,
                           )
                         ]);
                       }
@@ -457,103 +457,104 @@ class _BankPageState extends State<BankPage> {
         listener: AdMobService.bannerAdListener
     )..load();
   }
-}
-
-currencies(BuildContext context, Size size, CurrencyData currencyData) {
-  List<String> currenciesImage = [
-    'assets/images/USD.jpg',
-    'assets/images/EUR.jpg',
-    'assets/images/SAR.jpg',
-    'assets/images/AED.jpg',
-    'assets/images/BHD.jpg',
-    'assets/images/CHF.jpg',
-    'assets/images/GBP.jpg',
-    'assets/images/JOD.jpg',
-    'assets/images/JPY.jpg',
-    'assets/images/KWD.jpg',
-    'assets/images/OMR.jpg',
-    'assets/images/QAR.jpg',
-  ];
-  return Expanded(
-    child: ListView.separated(
-      padding: EdgeInsets.symmetric(
-        vertical: size.height * 0.01,
-      ),
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: size.height * 0.01,
-        );
-      },
-      itemCount: currencyData.currencies.length,
-      itemBuilder: (context, index) {
-        Currency currency = currencyData.currencies[index];
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-                height: size.height * 0.06,
-                width: size.width * 0.48,
-                decoration: BoxDecoration(
-                    color: Color(0xFF062A37),
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        bottomRight: Radius.circular(25))),
-                child: Row(
-                  //سعر الدولار اليوم في البنك والسوق السوداء
-                  //يمكنك متابعة سعر الدولار داخل وخارج البنوك لحظة بلحظة وسعر الذهب بجميع العيارات ومطابقته بالأسعار العالمية
-                  children: [
-                    Image.asset(currenciesImage[index], width: 16),
-                    SizedBox(
-                      width: size.width * 0.01,
-                    ),
-                    Text(
-                      '${currency.name}',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 16, height: 1),
-                    ),
-                  ],
+  Widget currencies(BuildContext context, Size size, CurrencyData currencyData) {
+    List<String> currenciesImage = [
+      'assets/images/USD.jpg',
+      'assets/images/EUR.jpg',
+      'assets/images/SAR.jpg',
+      'assets/images/AED.jpg',
+      'assets/images/BHD.jpg',
+      'assets/images/CHF.jpg',
+      'assets/images/GBP.jpg',
+      'assets/images/JOD.jpg',
+      'assets/images/JPY.jpg',
+      'assets/images/KWD.jpg',
+      'assets/images/OMR.jpg',
+      'assets/images/QAR.jpg',
+    ];
+    return Container(
+      height: size.height * 0.5,
+      child: ListView.separated(
+        shrinkWrap: true,
+        padding: EdgeInsets.symmetric(
+          vertical: size.height * 0.01,
+        ),
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            height: size.height * 0.01,
+          );
+        },
+        itemCount: currencyData.currencies.length,
+        itemBuilder: (context, index) {
+          Currency currency = currencyData.currencies[index];
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                  height: size.height * 0.06,
+                  width: size.width * 0.48,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF062A37),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(25),
+                          bottomRight: Radius.circular(25))),
+                  child: Row(
+                    //سعر الدولار اليوم في البنك والسوق السوداء
+                    //يمكنك متابعة سعر الدولار داخل وخارج البنوك لحظة بلحظة وسعر الذهب بجميع العيارات ومطابقته بالأسعار العالمية
+                    children: [
+                      Image.asset(currenciesImage[index], width: 16),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Text(
+                        '${currency.name}',
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 16, height: 1),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
+                Container(
+                    height: size.height * 0.06,
+                    width: size.width * 0.21,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Text('${currency.purchaseRate}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black,
+                            fontSize: 18,
+                          )),
+                    )),
+                Container(
                   height: size.height * 0.06,
                   width: size.width * 0.21,
                   decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
+                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(25))),
                   child: Center(
-                    child: Text('${currency.purchaseRate}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black,
-                          fontSize: 18,
-                        )),
-                  )),
-              Container(
-                height: size.height * 0.06,
-                width: size.width * 0.21,
-                decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        bottomLeft: Radius.circular(25))),
-                child: Center(
-                  child: Text(
-                    '${currency.sellRate}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Colors.black,
-                      fontSize: 18,
+                    child: Text(
+                      '${currency.sellRate}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-  );
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
