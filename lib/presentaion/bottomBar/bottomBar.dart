@@ -4,6 +4,7 @@ import 'package:dolar_today/presentaion/gold/gold.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+
 class BottomBar extends StatefulWidget {
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -112,4 +113,18 @@ class _BottomBarState extends State<BottomBar> {
       ),
     );
   }
+
+
+  // void _createInterstitialAd(){
+  //   InterstitialAd.load(
+  //       adUnitId: AdMobService.interstitialAdUnitId,
+  //       request: const AdRequest(),
+  //       adLoadCallback: InterstitialAdLoadCallback(
+  //         onAdLoaded: (ad) => _interstitialAd = ad,
+  //         onAdFailedToLoad: (LoadAdError error) {
+  //           debugPrint('InterstitialAd failed to load: $error');
+  //         },
+  //       ));
+  // }
+
 }

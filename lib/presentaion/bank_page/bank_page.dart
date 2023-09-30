@@ -5,6 +5,9 @@ import '../../constants/colors.dart';
 import '../../API/api.dart';
 import '../../models/currency.dart';
 import '../../models/currency_data.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../../service/admob_services.dart';
 
 class BankPage extends StatefulWidget {
   const BankPage({super.key ,required this.id});
@@ -16,6 +19,7 @@ class BankPage extends StatefulWidget {
 
 class _BankPageState extends State<BankPage> {
   final _api = API();
+  BannerAd? _bannerAd;
 
   List<String> imagesLogo = [
     'assets/images/black_souq.png',
@@ -27,6 +31,12 @@ class _BankPageState extends State<BankPage> {
     'assets/images/bank_alex.jpg',
     'assets/images/bank_alkwty.png',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _createBannerId();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +92,7 @@ class _BankPageState extends State<BankPage> {
                                   width: size.width,
                                   padding: EdgeInsets.symmetric(
                                       horizontal: size.width * 0.04),
-                                  child: Row(
+                                  child: Row(mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         padding: EdgeInsets.only(
@@ -102,10 +112,17 @@ class _BankPageState extends State<BankPage> {
                                               color: Colors.white),
                                         ),
                                       ),
+                                      _bannerAd == null ? Container() :
+                                      Container(
+                                        height: _bannerAd?.size.height.toDouble(),
+                                        width: size.width*0.8,
+                                        child: AdWidget(ad: _bannerAd!),
+                                      ),
                                     ],
                                   ),
                                 ),
                               ),
+
                               Positioned(
                                 top: size.height * 0.15,
                                 left: size.width * 0.05,
@@ -431,6 +448,15 @@ class _BankPageState extends State<BankPage> {
         return imagesLogo[0];
     }
   }
+
+  void _createBannerId() {
+    _bannerAd = BannerAd(
+        adUnitId: AdMobService.bannerAdUnitId,
+        request: const AdRequest(),
+        size: AdSize.banner,
+        listener: AdMobService.bannerAdListener
+    )..load();
+  }
 }
 
 currencies(BuildContext context, Size size, CurrencyData currencyData) {
@@ -467,7 +493,7 @@ currencies(BuildContext context, Size size, CurrencyData currencyData) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                 height: size.height * 0.06,
                 width: size.width * 0.48,
                 decoration: BoxDecoration(

@@ -45,6 +45,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="custom_notification_channel_id" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6848148437732539~6474051260"/>
 
     </application>
 </manifest>

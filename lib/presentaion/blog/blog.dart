@@ -1,7 +1,6 @@
 import 'package:dolar_today/models/blog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../API/api.dart';
 import '../../constants/colors.dart';
 
