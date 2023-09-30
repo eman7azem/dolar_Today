@@ -63,11 +63,11 @@ class _BankPageState extends State<BankPage> {
                           child: Column(children: [
                             Container(
                               width: double.infinity,
-                              height: size.height * 0.37,
+                              height: size.height * 0.55,
                               child: Stack(children: [
                                 Container(
                                   width: double.infinity,
-                                  height: size.height * 0.25,
+                                  height: size.height * 0.35,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -119,7 +119,7 @@ class _BankPageState extends State<BankPage> {
                                     padding: EdgeInsets.symmetric(
                                         vertical: size.height * 0.012,
                                         horizontal: size.width * 0.03),
-                                    height: size.height * 0.215,
+                                    height: size.height * 0.38,
                                     width: size.width,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
@@ -141,31 +141,7 @@ class _BankPageState extends State<BankPage> {
                                           height: _bannerAd?.size.height.toDouble(),
                                           width: size.width,
                                           child: AdWidget(ad: _bannerAd!),
-                                        ),
-
-
-                                        // Row(
-                                        //   children: [
-                                        //     Image.asset(
-                                        //       getImage(),
-                                        //       width: size.width * 0.09,
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: size.width * 0.02,
-                                        //     ),
-                                        //     Text(
-                                        //       '${currencyData.bank.name}',
-                                        //       style: TextStyle(
-                                        //           color: Colors.black,
-                                        //           fontSize: 20),
-                                        //     ),
-                                        //     Spacer(),
-                                        //   ],
-                                        // ),
-                                        // SizedBox(
-                                        //   height: size.height * 0.01,
-                                        // ),
-                                      ],
+                                        ),],
                                     ),
                                   ),
                                 ),
@@ -396,7 +372,7 @@ class _BankPageState extends State<BankPage> {
     _bannerAd = BannerAd(
         adUnitId: AdMobService.bannerAdUnitId,
         request: const AdRequest(),
-        size: AdSize.banner,
+        size: AdSize.mediumRectangle,
         listener: AdMobService.bannerAdListener
     )..load();
   }
