@@ -59,131 +59,130 @@ class _BankPageState extends State<BankPage> {
                     } else {
                       CurrencyData? currencyData = snapshot.data;
                       if(currencyData != null){
-                        return Column(children: [
-                          Container(
-                            width: double.infinity,
-                            height: size.height * 0.33,
-                            child: Stack(children: [
-                              Container(
-                                width: double.infinity,
-                                height: size.height * 0.22,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF124C6C),
-                                      Color(0xFF2378A8)
-                                    ],
-                                    begin: Alignment.centerRight,
-                                    end: Alignment.centerLeft,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: size.height * 0.03,
-                                child: Container(
-                                  width: size.width,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: size.width * 0.04),
-                                  child: Row(mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                            right: 10,
-                                            top: 5,
-                                            left: 3,
-                                            bottom: 5),
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: kPrimaryColor,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Icon(Icons.arrow_back_ios,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                      _bannerAd == null ? Container() :
-                                      Container(
-                                        height: _bannerAd?.size.height.toDouble(),
-                                        width: size.width*0.8,
-                                        child: AdWidget(ad: _bannerAd!),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Positioned(
-                                top: size.height * 0.15,
-                                left: size.width * 0.05,
-                                right: size.width * 0.05,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: size.height * 0.012,
-                                      horizontal: size.width * 0.03),
-                                  height: size.height * 0.18,
-                                  width: size.width,
+                        return SingleChildScrollView(
+                          child: Column(children: [
+                            Container(
+                              width: double.infinity,
+                              height: size.height * 0.36,
+                              child: Stack(children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: size.height * 0.25,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 3,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            getImage(),
-                                            width: size.width * 0.09,
-                                          ),
-                                          SizedBox(
-                                            width: size.width * 0.02,
-                                          ),
-                                          Text(
-                                            '${currencyData.bank.name}',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20),
-                                          ),
-                                          Spacer(),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: kPrimaryColor,
-                                            ),
-                                            child: Icon(
-                                              Icons.call,
-                                              color: Colors.white,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: size.height * 0.01,
-                                      ),
-                                      pricesWidget(size, currencyData)
-                                    ],
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFF124C6C),
+                                        Color(0xFF2378A8)
+                                      ],
+                                      begin: Alignment.centerRight,
+                                      end: Alignment.centerLeft,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ]),
-                          ),
-                          SizedBox(
-                            height: size.height * 0.03,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Column(
+                                Positioned(
+                                  top: size.height * 0.03,
+                                  child: Container(
+                                    width: size.width,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: size.width * 0.04),
+                                    child: Row(mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              right: 10,
+                                              top: 5,
+                                              left: 3,
+                                              bottom: 5),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: kPrimaryColor,
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Icon(Icons.arrow_back_ios,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        _bannerAd == null ? Container() :
+                                        Container(
+                                          height: _bannerAd?.size.height.toDouble(),
+                                          width: size.width*0.8,
+                                          child: AdWidget(ad: _bannerAd!),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                Positioned(
+                                  top: size.height * 0.15,
+                                  left: size.width * 0.05,
+                                  right: size.width * 0.05,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: size.height * 0.012,
+                                        horizontal: size.width * 0.03),
+                                    height: size.height * 0.21,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 3,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              getImage(),
+                                              width: size.width * 0.09,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              '${currencyData.bank.name}',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20),
+                                            ),
+                                            Spacer(),
+                                            Container(
+                                              padding: EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: kPrimaryColor,
+                                              ),
+                                              child: Icon(
+                                                Icons.call,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: size.height * 0.01,
+                                        ),
+                                        pricesWidget(size, currencyData)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.03,
+                            ),
+                            Column(
                               children: [
                                 Divider(
                                   color: Colors.grey.shade300,
@@ -198,16 +197,16 @@ class _BankPageState extends State<BankPage> {
                                   height: size.height * 0.02,
                                 ),
                                 Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: size.width * 0.03),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    'الاسعار تختلف حسب المحافظه والوقت ومحل الصرافة وحتى حسب التفاوض. السعر المعروض هو معدل متوسط نحسبه من اكثر من مكان',
-                                    style: TextStyle(fontSize: 16),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.03),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'الاسعار تختلف حسب المحافظه والوقت ومحل الصرافة وحتى حسب التفاوض. السعر المعروض هو معدل متوسط نحسبه من اكثر من مكان',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                 ),
-                              ),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 ),
@@ -274,14 +273,14 @@ class _BankPageState extends State<BankPage> {
                                   ),
                                 ),
                                 Container(
-                                  height: size.height*0.32,
+                                  height: size.height*0.5,
                                   child: currencies(context, size, currencyData),),
                                 SizedBox(
                                   height: size.height * 0.02,
                                 )],
                             ),
-                          )
-                        ]);
+                          ]),
+                        );
                       }
                       return Center(
                         child: Text('خطأ  في السيرفر',style: TextStyle(fontSize: 18),),
@@ -375,12 +374,53 @@ class _BankPageState extends State<BankPage> {
                     color: Colors.grey.shade700,
                     fontSize: 20),
               ),
-              Text(
-                '${currencyData.blackPrice} ج.م',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18),
-              )
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        'شراء',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '20ج.م',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize:
+                          18, // Set an initial font size
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(width: size.width*0.03,),
+                  Column(
+                    children: [
+                      Text(
+                        'بيع',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '20ج.م',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              // Text(
+              //   '${currencyData.blackPrice} ج.م',
+              //   style: TextStyle(
+              //       color: Colors.black,
+              //       fontSize: 18),
+              // )
             ],
           )
         ],
@@ -414,12 +454,53 @@ class _BankPageState extends State<BankPage> {
                   color: Colors.grey.shade700,
                   fontSize: 20),
             ),
-            Text(
-              '${currencyData.blackPrice} ج.م',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18),
-            )
+            // Text(
+            //   '${currencyData.blackPrice} ج.م',
+            //   style: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 18),
+            // ),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'شراء',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      ' 20ج.م',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize:
+                        18, // Set an initial font size
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: size.width*0.03,),
+                Column(
+                  children: [
+                    Text(
+                      'بيع',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      '20ج.م',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
           ],
         )
       ],
@@ -472,89 +553,87 @@ class _BankPageState extends State<BankPage> {
       'assets/images/OMR.jpg',
       'assets/images/QAR.jpg',
     ];
-    return Container(
-      height: size.height * 0.5,
-      child: ListView.separated(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(
-          vertical: size.height * 0.01,
-        ),
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: size.height * 0.01,
-          );
-        },
-        itemCount: currencyData.currencies.length,
-        itemBuilder: (context, index) {
-          Currency currency = currencyData.currencies[index];
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
-                  height: size.height * 0.06,
-                  width: size.width * 0.48,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF062A37),
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(25),
-                          bottomRight: Radius.circular(25))),
-                  child: Row(
-                    //سعر الدولار اليوم في البنك والسوق السوداء
-                    //يمكنك متابعة سعر الدولار داخل وخارج البنوك لحظة بلحظة وسعر الذهب بجميع العيارات ومطابقته بالأسعار العالمية
-                    children: [
-                      Image.asset(currenciesImage[index], width: 16),
-                      SizedBox(
-                        width: size.width * 0.01,
-                      ),
-                      Text(
-                        '${currency.name}',
-                        style: TextStyle(
-                            color: Colors.white, fontSize: 16, height: 1),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                    height: size.height * 0.06,
-                    width: size.width * 0.21,
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
+    return ListView.separated(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(
+        vertical: size.height * 0.01,
+      ),
+      separatorBuilder: (context, index) {
+        return SizedBox(
+          height: size.height * 0.01,
+        );
+      },
+      itemCount: currencyData.currencies.length,
+      itemBuilder: (context, index) {
+        Currency currency = currencyData.currencies[index];
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                height: size.height * 0.06,
+                width: size.width * 0.48,
+                decoration: BoxDecoration(
+                    color: Color(0xFF062A37),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(25),
+                        bottomRight: Radius.circular(25))),
+                child: Row(
+                  //سعر الدولار اليوم في البنك والسوق السوداء
+                  //يمكنك متابعة سعر الدولار داخل وخارج البنوك لحظة بلحظة وسعر الذهب بجميع العيارات ومطابقته بالأسعار العالمية
+                  children: [
+                    Image.asset(currenciesImage[index], width: 16),
+                    SizedBox(
+                      width: size.width * 0.01,
                     ),
-                    child: Center(
-                      child: Text('${currency.purchaseRate}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black,
-                            fontSize: 18,
-                          )),
-                    )),
-                Container(
+                    Text(
+                      '${currency.name}',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 16, height: 1),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
                   height: size.height * 0.06,
                   width: size.width * 0.21,
                   decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          bottomLeft: Radius.circular(25))),
+                    color: kPrimaryColor,
+                  ),
                   child: Center(
-                    child: Text(
-                      '${currency.sellRate}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
+                    child: Text('${currency.purchaseRate}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black,
+                          fontSize: 18,
+                        )),
+                  )),
+              Container(
+                height: size.height * 0.06,
+                width: size.width * 0.21,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        bottomLeft: Radius.circular(25))),
+                child: Center(
+                  child: Text(
+                    '${currency.sellRate}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black,
+                      fontSize: 18,
                     ),
                   ),
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
