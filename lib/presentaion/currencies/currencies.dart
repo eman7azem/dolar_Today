@@ -75,7 +75,7 @@ class _CurrenciesState extends State<Currencies> {
                           _bannerAd == null
                               ? Container()
                               : Container(
-                                  height: _bannerAd?.size.height.toDouble(),
+                                  height: _bannerAd!.size.height.toDouble(),
                                   child: AdWidget(ad: _bannerAd!)),
                           Container(
                             height: size.height * 0.08,

@@ -124,7 +124,7 @@ class _BankPageState extends State<BankPage> {
                                     padding: EdgeInsets.symmetric(
                                         vertical: size.height * 0.012,
                                         horizontal: size.width * 0.03),
-                                    height: size.height * 0.21,
+                                    height: size.height * 0.22,
                                     width: size.width,
                                     decoration: BoxDecoration(
                                       color: Colors.white,

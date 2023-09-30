@@ -1,17 +1,32 @@
 import 'package:dolar_today/models/blog.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../API/api.dart';
 import '../../constants/colors.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../../service/admob_services.dart';
 
-class Blog extends StatelessWidget {
+class Blog extends StatefulWidget {
   const Blog({super.key});
+
+  @override
+  State<Blog> createState() => _BlogState();
+}
+
+class _BlogState extends State<Blog> {
+
+  final _api = API();
+  BannerAd? _bannerAd;
+
+  @override
+  void initState() {
+    super.initState();
+    _createBannerId();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    final _api = API();
 
     return Scaffold(
       appBar: AppBar(
@@ -30,38 +45,6 @@ class Blog extends StatelessWidget {
               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
         ),
         elevation: 4,
-        // actions: [
-        //   GestureDetector(
-        //     onTap: () {
-        //       _showDialog(context, size);
-        //     },
-        //     child: Container(
-        //       margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
-        //       padding: EdgeInsets.symmetric(horizontal: 7),
-        //       decoration: BoxDecoration(
-        //           color: kPrimaryColor,
-        //           borderRadius: BorderRadius.circular(7)),
-        //       child: Row(
-        //         children: [
-        //           Icon(
-        //             Icons.calculate_outlined,
-        //             color: Colors.black,
-        //           ),
-        //           SizedBox(
-        //             width: 5,
-        //           ),
-        //           Text(
-        //             'حساب المصنعيه',
-        //             style: TextStyle(
-        //                 color: Colors.black,
-        //                 fontWeight: FontWeight.w600,
-        //                 fontSize: 20),
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //   )
-        // ],
       ),
       body: FutureBuilder(
           future: _api.blogs(),
@@ -76,6 +59,15 @@ class Blog extends StatelessWidget {
               List<BlogModel> blogs = snapshot.data;
               return Column(
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _bannerAd == null ? Container() :
+                  Container(
+                    height: _bannerAd?.size.height.toDouble(),
+                    width: size.width*0.8,
+                    child: AdWidget(ad: _bannerAd!),
+                  ),
                   Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.only(top: size.height * 0.02),
@@ -128,5 +120,13 @@ class Blog extends StatelessWidget {
             }
           }),
     );
+  }
+  void _createBannerId() {
+    _bannerAd = BannerAd(
+        adUnitId: AdMobService.bannerAdUnitId,
+        request: const AdRequest(),
+        size: AdSize.largeBanner,
+        listener: AdMobService.bannerAdListener
+    )..load();
   }
 }
