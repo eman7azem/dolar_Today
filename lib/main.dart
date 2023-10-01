@@ -39,13 +39,15 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
+
     messaging.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
+
     messaging.subscribeToTopic("all");
-    setupFcm();
+
     _createRewardAd();
     _rewardedAdTimer = Timer.periodic(Duration(minutes: 5), (timer) {
       _showRewardedAd();

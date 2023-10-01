@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdMobService {
   static String get bannerAdUnitId {
-    return 'ca-app-pub-6848148437732539/6108903961';
+    return 'ca-app-pub-6848148437732539/7202509694';
   }
   // static String get interstitialAdUnitId {
   //   return 'ca-app-pub-6848148437732539/1632788126';
