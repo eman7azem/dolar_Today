@@ -33,16 +33,6 @@ class _CurrenciesState extends State<Currencies> {
     'assets/images/bank_alex.jpg',
     'assets/images/bank_alkwty.png',
   ];
-  List<String> text = [
-    'سعر السوق السوداء',
-    'البنك الاهلي المصري',
-    'بنك مصر',
-    'بنك CIB',
-    'بنك QNB',
-    'البنك المركزي المصري',
-    'بنك الاسكندريه',
-    'البنك الاهلي الدولي',
-  ];
 
   bool isLike = false;
   final _api = API();
@@ -92,6 +82,34 @@ class _CurrenciesState extends State<Currencies> {
                                   'دولار امريكي/ USD ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF124C6C), Color(0xFF2378A8)],
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                            height: size.height * 0.09,
+                            width: double.infinity,
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'اخر تحديث',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade700,
+                                      fontSize: 20),
+                                ),
+                                Text(
+                                 'منذ ساعه',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18),
                                 ),
                               ],
                             ),
