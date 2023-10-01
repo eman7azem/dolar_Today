@@ -110,7 +110,6 @@ class _BankPageState extends State<BankPage> {
                                     ),
                                   ),
                                 ),
-
                                 Positioned(
                                   top: size.height * 0.15,
                                   left: size.width * 0.05,
