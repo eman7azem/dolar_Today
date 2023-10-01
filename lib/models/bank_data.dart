@@ -5,10 +5,12 @@ import 'average.dart';
 class BankData {
   final List<Bank> banks;
   final Average average;
+  final DateTime? lastUpdate;
 
   BankData({
     required this.banks,
     required this.average,
+    required this.lastUpdate
   });
 
   factory BankData.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,7 @@ class BankData {
     return BankData(
       banks: banks,
       average: Average.fromJson(json['average']),
+      lastUpdate: json['last_update'] != null ? DateTime.parse(json['last_update']) : null,
     );
   }
 }

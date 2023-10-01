@@ -1,6 +1,7 @@
 import 'package:dolar_today/constants/navigator.dart';
 import 'package:dolar_today/models/bank_data.dart';
 import 'package:dolar_today/presentaion/bank_page/bank_page.dart';
+import 'package:dolar_today/utils/date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -18,11 +19,15 @@ class Currencies extends StatefulWidget {
 
 class _CurrenciesState extends State<Currencies> {
 
+  BannerAd? _bannerAd;
+  RewardedAd? _rewardedAd;
+  bool showed = false;
+
   @override
   void initState() {
     super.initState();
+    _createBannerId();
   }
-  BannerAd? _bannerAd;
 
   List<String> imagesLogo = [
     'assets/images/black_souq.png',
@@ -38,6 +43,7 @@ class _CurrenciesState extends State<Currencies> {
   bool isLike = false;
   final _api = API();
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,6 +56,7 @@ class _CurrenciesState extends State<Currencies> {
               onRefresh: () async {
                 setState(() {
                 });
+
               },
               child: FutureBuilder(
                   future: _api.banks(),
@@ -112,7 +119,7 @@ class _CurrenciesState extends State<Currencies> {
                                         fontSize: 20),
                                   ),
                                   Text(
-                                   'منذ ساعه',
+                                   convertToString(bankData.lastUpdate),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18),
@@ -289,5 +296,47 @@ class _CurrenciesState extends State<Currencies> {
             ),
           ),
         ));
+  }
+  void _createBannerId() {
+    _bannerAd = BannerAd(
+        adUnitId: AdMobService.bannerAdUnitId,
+        request: const AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: AdMobService.bannerAdListener
+    )..load();
+  }
+
+  void _createRewardAd() {
+    RewardedAd.load(
+        adUnitId: AdMobService.rewardAdUnitId,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad) => setState(() {
+              _rewardedAd = ad;
+              if(!showed){
+                _showRewardedAd();
+              }
+              showed = true;
+            }),
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('Add failed to load $error');
+            }));
+  }
+
+  void _showRewardedAd(){
+    if(_rewardedAd != null){
+      _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            _createRewardAd();
+          },
+          onAdFailedToShowFullScreenContent: (ad, error){
+            ad.dispose();
+            _createRewardAd();
+          }
+      );
+      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {});
+      _rewardedAd = null;
+    }
   }
 }

@@ -10,7 +10,7 @@ class AdMobService {
   //   return 'ca-app-pub-6848148437732539/1632788126';
   // }
   static String get rewardAdUnitId {
-    return 'ca-app-pub-6848148437732539/6492047349';
+    return 'ca-app-pub-6848148437732539/8324057664';
   }
 
   static final BannerAdListener bannerAdListener = BannerAdListener(
