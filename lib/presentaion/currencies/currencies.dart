@@ -194,12 +194,6 @@ class _CurrenciesState extends State<Currencies> {
                                                               18, // Set an initial font size
                                                             ),
                                                           ),
-                                                          Icon(
-                                                            Icons
-                                                                .arrow_upward_sharp,
-                                                            color:
-                                                            Color(0xff3ea04d),
-                                                          )
                                                         ],
                                                       ),
                                                     ],
@@ -229,12 +223,6 @@ class _CurrenciesState extends State<Currencies> {
                                                               fontSize: 18,
                                                             ),
                                                           ),
-                                                          Icon(
-                                                            Icons
-                                                                .arrow_upward_sharp,
-                                                            color:
-                                                            Color(0xff3ea04d),
-                                                          )
                                                         ],
                                                       ),
                                                     ],

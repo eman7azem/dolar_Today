@@ -1,5 +1,6 @@
 import 'package:dolar_today/models/gold.dart';
 import 'package:dolar_today/service/admob_services.dart';
+import 'package:dolar_today/utils/date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../API/api.dart';
@@ -105,7 +106,7 @@ class _GoldState extends State<Gold> {
                                 horizontal: size.width * 0.04,
                               ),
                               child: ListView.builder(
-                                itemCount: goldImage.length + 1,
+                                itemCount: goldImage.length,
                                 itemBuilder: (context, index) {
                                   final goldModel = golds[index];
                                   return Container(
@@ -178,7 +179,7 @@ class _GoldState extends State<Gold> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Text(
-                                              'منذ ساعه',
+                                              '${convertToString(goldModel.lastUpdate)}',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 18,
