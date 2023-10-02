@@ -254,11 +254,9 @@ class _BankPageState extends State<BankPage> {
                                     ),
                                   ),
                                   Container(
-                                    height: size.height*0.5,
+                                    height: size.height*0.9,
                                     child: currencies(context, size, currencyData),),
-                                  SizedBox(
-                                    height: size.height * 0.02,
-                                  )],
+                                  ],
                               ),
                             ]),
                           );
