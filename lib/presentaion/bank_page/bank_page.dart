@@ -8,6 +8,7 @@ import '../../models/currency_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../service/admob_services.dart';
+import '../../utils/flags.dart';
 
 class BankPage extends StatefulWidget {
   const BankPage({super.key ,required this.id});
@@ -382,20 +383,6 @@ class _BankPageState extends State<BankPage> {
     )..load();
   }
   Widget currencies(BuildContext context, Size size, CurrencyData currencyData) {
-    List<String> currenciesImage = [
-      'assets/images/USD.jpg',
-      'assets/images/EUR.jpg',
-      'assets/images/SAR.jpg',
-      'assets/images/AED.jpg',
-      'assets/images/BHD.jpg',
-      'assets/images/CHF.jpg',
-      'assets/images/GBP.jpg',
-      'assets/images/JOD.jpg',
-      'assets/images/JPY.jpg',
-      'assets/images/KWD.jpg',
-      'assets/images/OMR.jpg',
-      'assets/images/QAR.jpg',
-    ];
     return ListView.separated(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -409,6 +396,7 @@ class _BankPageState extends State<BankPage> {
       },
       itemCount: currencyData.currencies.length,
       itemBuilder: (context, index) {
+        print("currencies length is ${currencyData.currencies.length}");
         Currency currency = currencyData.currencies[index];
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
@@ -425,10 +413,8 @@ class _BankPageState extends State<BankPage> {
                         topRight: Radius.circular(25),
                         bottomRight: Radius.circular(25))),
                 child: Row(
-                  //سعر الدولار اليوم في البنك والسوق السوداء
-                  //يمكنك متابعة سعر الدولار داخل وخارج البنوك لحظة بلحظة وسعر الذهب بجميع العيارات ومطابقته بالأسعار العالمية
                   children: [
-                    Image.asset(currenciesImage[index], width: 16),
+                    Image.asset(getFlag(currency.name), width: 16),
                     SizedBox(
                       width: size.width * 0.01,
                     ),

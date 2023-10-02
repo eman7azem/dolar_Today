@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../API/api.dart';
-import '../../constants/colors.dart';
 import '../../models/bank.dart';
 import '../../service/admob_services.dart';
 
@@ -19,14 +18,12 @@ class Currencies extends StatefulWidget {
 
 class _CurrenciesState extends State<Currencies> {
 
-  BannerAd? _bannerAd;
   RewardedAd? _rewardedAd;
   bool showed = false;
 
   @override
   void initState() {
     super.initState();
-    _createBannerId();
   }
 
   List<String> imagesLogo = [
@@ -56,7 +53,7 @@ class _CurrenciesState extends State<Currencies> {
               onRefresh: () async {
                 setState(() {
                 });
-
+                _createRewardAd();
               },
               child: FutureBuilder(
                   future: _api.banks(),
@@ -135,15 +132,22 @@ class _CurrenciesState extends State<Currencies> {
                                 child: ListView.builder(
                                   itemCount: bankData.banks.length,
                                   itemBuilder: (context, index) {
-                                    if (index == 2) {
-                                      return Container(
-                                        height: _bannerAd?.size.height.toDouble(),
-                                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                    Bank bank = bankData.banks[index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        navigateTo(
+                                            context,
+                                            BankPage(
+                                              id: bank.id,
+                                            ));
+                                      },
+                                      child: Container(
+                                        height: size.height*0.19,
+                                        padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(
-                                          top: size.width * 0.03,
-                                          left: size.width * 0.01,
-                                          right: size.width * 0.01,
-                                        ),
+                                            top: size.width * 0.03,
+                                            left: size.width * 0.01,
+                                            right: size.width * 0.01),
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
@@ -157,130 +161,91 @@ class _CurrenciesState extends State<Currencies> {
                                           ],
                                           borderRadius: BorderRadius.circular(10),
                                         ),
-                                        child: _bannerAd == null
-                                            ? Container()
-                                            : Container(
-                                          width: size.width,
-                                          height: _bannerAd!.size.height.toDouble(), // Set the height here
-                                          child: AdWidget(ad: _bannerAd!),
-                                        ),
-                                      );
-                                    } else {
-                                      Bank bank = bankData.banks[index > 2 ? index - 1 : index];
-                                      return GestureDetector(
-                                        onTap: () {
-                                          navigateTo(
-                                              context,
-                                              BankPage(
-                                                id: bank.id,
-                                              ));
-                                        },
-                                        child: Container(
-                                          height: size.height*0.19,
-                                          padding: EdgeInsets.all(10),
-                                          margin: EdgeInsets.only(
-                                              top: size.width * 0.03,
-                                              left: size.width * 0.01,
-                                              right: size.width * 0.01),
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey.withOpacity(0.4),
-                                                spreadRadius: 1,
-                                                blurRadius: 2,
-                                                offset: Offset(0, 1),
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: Image.asset(
+                                                imagesLogo[index],
+                                                height: size.height * 0.02,
                                               ),
-                                            ],
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Expanded(
-                                                child: Image.asset(
-                                                  imagesLogo[index],
-                                                  height: size.height * 0.02,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                          'شراء',
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                          ),
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              '${bank.dollarPurchaseRate}',
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize:
-                                                                18, // Set an initial font size
-                                                              ),
-                                                            ),
-                                                            Icon(
-                                                              Icons
-                                                                  .arrow_upward_sharp,
-                                                              color:
-                                                              Color(0xff3ea04d),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Text(
-                                                      '${bank.name}',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.w700,
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        'شراء',
+                                                        style: TextStyle(
                                                           fontSize: 18,
-                                                          height: 2),
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                          'بيع',
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                          ),
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              '${bank.dollarSellRate}',
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 18,
-                                                              ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${bank.dollarPurchaseRate}',
+                                                            style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize:
+                                                              18, // Set an initial font size
                                                             ),
-                                                            Icon(
-                                                              Icons
-                                                                  .arrow_upward_sharp,
-                                                              color:
-                                                              Color(0xff3ea04d),
-                                                            )
-                                                          ],
+                                                          ),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_upward_sharp,
+                                                            color:
+                                                            Color(0xff3ea04d),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                    '${bank.name}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                        FontWeight.w700,
+                                                        fontSize: 18,
+                                                        height: 2),
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        'بيع',
+                                                        style: TextStyle(
+                                                          fontSize: 18,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${bank.dollarSellRate}',
+                                                            style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize: 18,
+                                                            ),
+                                                          ),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_upward_sharp,
+                                                            color:
+                                                            Color(0xff3ea04d),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      );
-                                    }
+                                      ),
+                                    );
 
                                   },
                                 ),
@@ -296,14 +261,6 @@ class _CurrenciesState extends State<Currencies> {
             ),
           ),
         ));
-  }
-  void _createBannerId() {
-    _bannerAd = BannerAd(
-        adUnitId: AdMobService.bannerAdUnitId,
-        request: const AdRequest(),
-        size: AdSize.mediumRectangle,
-        listener: AdMobService.bannerAdListener
-    )..load();
   }
 
   void _createRewardAd() {

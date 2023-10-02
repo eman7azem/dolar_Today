@@ -42,7 +42,6 @@ class _GoldState extends State<Gold> {
   @override
   void initState() {
     super.initState();
-    _createBannerId();
   }
 
   @override
@@ -108,120 +107,88 @@ class _GoldState extends State<Gold> {
                               child: ListView.builder(
                                 itemCount: goldImage.length + 1,
                                 itemBuilder: (context, index) {
-                                  if (index == 2) {
-                                    return Container(
-                                      height: _bannerAd?.size.height.toDouble(),
-                                      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                      margin: EdgeInsets.only(
-                                        top: size.width * 0.03,
-                                        left: size.width * 0.01,
-                                        right: size.width * 0.01,
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.4),
-                                            spreadRadius: 1,
-                                            blurRadius: 2,
-                                            offset: Offset(0, 1),
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: _bannerAd == null
-                                          ? Container()
-                                          : Container(
-                                        width: size.width,
-                                        height: _bannerAd!.size.height.toDouble(), // Set the height here
-                                        child: AdWidget(ad: _bannerAd!),
-                                      ),
-                                    );
-                                  } else {
-                                    final goldModel = golds[index > 2 ? index - 1 : index];
-                                    return Container(
-                                      padding: EdgeInsets.all(10),
-                                      margin: EdgeInsets.only(
-                                        top: size.width * 0.03,
-                                        left: size.width * 0.01,
-                                        right: size.width * 0.01,
-                                      ),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.4),
-                                            spreadRadius: 1,
-                                            blurRadius: 2,
-                                            offset: Offset(0, 1),
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  final goldModel = golds[index];
+                                  return Container(
+                                    padding: EdgeInsets.all(10),
+                                    margin: EdgeInsets.only(
+                                      top: size.width * 0.03,
+                                      left: size.width * 0.01,
+                                      right: size.width * 0.01,
+                                    ),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1),
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    height: 35,
-                                                    goldImage[index > 2 ? index - 1 : index],
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image.asset(
+                                                  height: 35,
+                                                  goldImage[index],
+                                                ),
+                                                Text(
+                                                  text[index],
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  'ج.م',
+                                                  style: TextStyle(
+                                                    fontSize: 20,
                                                   ),
-                                                  Text(
-                                                    text[index > 2 ? index - 1 : index],
-                                                    style: TextStyle(
-                                                        fontWeight: FontWeight.w700,
-                                                        fontSize: 18),
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    'ج.م',
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    goldModel.price.toString(),
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: size.height*0.03,),
-                                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'اخر تحديث',
-                                                style: TextStyle(
+                                                ),
+                                                Text(
+                                                  goldModel.price.toString(),
+                                                  style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 18,
-                                                fontWeight: FontWeight.w600),
-                                              ),
-                                              Text(
-                                                'منذ ساعه',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: size.height*0.03,),
+                                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'اخر تحديث',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              'منذ ساعه',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 },
                               ),
                             ),
@@ -233,14 +200,5 @@ class _GoldState extends State<Gold> {
             ),
           ),
         ));
-  }
-
-  void _createBannerId() {
-    _bannerAd = BannerAd(
-        adUnitId: AdMobService.bannerAdUnitId,
-        request: const AdRequest(),
-        size: AdSize.mediumRectangle,
-        listener: AdMobService.bannerAdListener
-    )..load();
   }
 }
