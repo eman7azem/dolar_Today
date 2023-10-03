@@ -49,9 +49,6 @@ class _MyAppState extends State<MyApp> {
     messaging.subscribeToTopic("all");
 
     _createRewardAd();
-    _rewardedAdTimer = Timer.periodic(Duration(minutes: 5), (timer) {
-      _showRewardedAd();
-    });
   }
 
   @override

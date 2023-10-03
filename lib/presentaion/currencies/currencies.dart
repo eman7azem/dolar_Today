@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../API/api.dart';
 import '../../models/bank.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../../service/admob_services.dart';
+
 
 class Currencies extends StatefulWidget {
   const Currencies({super.key});
@@ -15,9 +19,13 @@ class Currencies extends StatefulWidget {
 }
 
 class _CurrenciesState extends State<Currencies> {
+  RewardedAd? _rewardedAd;
+  bool showed = false;
+
   @override
   void initState() {
     super.initState();
+    _createRewardAd();
   }
 
   List<String> imagesLogo = [
@@ -47,6 +55,7 @@ class _CurrenciesState extends State<Currencies> {
               onRefresh: () async {
                 setState(() {
                 });
+                _createRewardAd();
               },
               child: FutureBuilder(
                   future: _api.banks(),
@@ -109,7 +118,7 @@ class _CurrenciesState extends State<Currencies> {
                                         fontSize: 20),
                                   ),
                                   Text(
-                                   convertToString(bankData.lastUpdate),
+                                    convertToString(bankData.lastUpdate),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18),
@@ -242,6 +251,39 @@ class _CurrenciesState extends State<Currencies> {
             ),
           ),
         ));
+  }
+
+  void _createRewardAd() {
+    RewardedAd.load(
+        adUnitId: AdMobService.rewardAdUnitId,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad) => setState(() {
+              _rewardedAd = ad;
+              if(!showed){
+                _showRewardedAd();
+              }
+              showed = true;
+            }),
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('Add failed to load $error');
+            }));
+  }
+  void _showRewardedAd(){
+    if(_rewardedAd != null){
+      _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            _createRewardAd();
+          },
+          onAdFailedToShowFullScreenContent: (ad, error){
+            ad.dispose();
+            _createRewardAd();
+          }
+      );
+      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {});
+      _rewardedAd = null;
+    }
   }
 
 }

@@ -70,6 +70,7 @@ class _BlogState extends State<Blog> {
                       child: ListView.builder(
                         padding: EdgeInsets.only(top: size.height * 0.02),
                         itemCount: blogs.length,
+                        reverse: true,
                         itemBuilder: (context, index) {
                           return Card(
                             margin: EdgeInsets.symmetric(

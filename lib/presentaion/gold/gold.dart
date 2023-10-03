@@ -14,9 +14,6 @@ class Gold extends StatefulWidget {
 }
 
 class _GoldState extends State<Gold> {
-
-  BannerAd? _bannerAd;
-
   List<String> goldImage = [
     'assets/images/gold.png',
     'assets/images/gold.png',
@@ -132,8 +129,8 @@ class _GoldState extends State<Gold> {
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               children: [
@@ -144,32 +141,68 @@ class _GoldState extends State<Gold> {
                                                 Text(
                                                   text[index],
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       fontSize: 18),
                                                 ),
                                               ],
                                             ),
-                                            Column(
+                                            Row(
                                               children: [
-                                                Text(
-                                                  'ج.م',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                  ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      'شراء',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          '${goldModel.price}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                            18, // Set an initial font size
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  goldModel.price.toString(),
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                  ),
+                                                SizedBox(width: size.width * 0.08,),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      'بيع',
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          '${goldModel.sell}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 18,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: size.height*0.03,),
-                                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        SizedBox(
+                                          height: size.height * 0.03,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'اخر تحديث',
