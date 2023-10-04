@@ -20,7 +20,7 @@ class Currencies extends StatefulWidget {
 
 class _CurrenciesState extends State<Currencies> {
   RewardedAd? _rewardedAd;
-  bool showed = false;
+
 
   @override
   void initState() {
@@ -260,10 +260,10 @@ class _CurrenciesState extends State<Currencies> {
         rewardedAdLoadCallback: RewardedAdLoadCallback(
             onAdLoaded: (ad) => setState(() {
               _rewardedAd = ad;
-              if(!showed){
+              if(!AdMobService.isRewardedShowed){
                 _showRewardedAd();
               }
-              showed = true;
+              AdMobService.isRewardedShowed = true;
             }),
             onAdFailedToLoad: (LoadAdError error) {
               debugPrint('Add failed to load $error');

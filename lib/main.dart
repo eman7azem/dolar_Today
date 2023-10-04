@@ -30,10 +30,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  RewardedAd? _rewardedAd;
-  late Timer _rewardedAdTimer;
-  bool showed = false;
-
   @override
   void initState() {
     super.initState();
@@ -48,7 +44,6 @@ class _MyAppState extends State<MyApp> {
 
     messaging.subscribeToTopic("all");
 
-    _createRewardAd();
   }
 
   @override
@@ -56,44 +51,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'سعر الدولار اليوم في السوق السودا',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(backgroundColor: Colors.white)
+        appBarTheme: AppBarTheme(backgroundColor: Colors.white),
       ),
       debugShowCheckedModeBanner: false,
-      home:BottomBar() ,
+      home: BottomBar(),
     );
   }
-
-  void _createRewardAd() {
-    RewardedAd.load(
-        adUnitId: AdMobService.rewardAdUnitId,
-        request: const AdRequest(),
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-            onAdLoaded: (ad) => setState(() {
-              _rewardedAd = ad;
-              if(!showed){
-                _showRewardedAd();
-              }
-              showed = true;
-            }),
-            onAdFailedToLoad: (LoadAdError error) {
-              debugPrint('Add failed to load $error');
-            }));
-  }
-  void _showRewardedAd(){
-    if(_rewardedAd != null){
-      _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-          onAdDismissedFullScreenContent: (ad){
-            ad.dispose();
-            _createRewardAd();
-          },
-          onAdFailedToShowFullScreenContent: (ad, error){
-            ad.dispose();
-            _createRewardAd();
-          }
-      );
-      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {});
-      _rewardedAd = null;
-    }
-  }
 }
-

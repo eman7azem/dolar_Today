@@ -15,7 +15,6 @@ class Blog extends StatefulWidget {
 class _BlogState extends State<Blog> {
 
   final _api = API();
-  BannerAd? _bannerAd;
 
   @override
   void initState() {
@@ -61,6 +60,7 @@ class _BlogState extends State<Blog> {
                 );
               } else {
                 List<BlogModel> blogs = snapshot.data;
+                blogs = blogs.reversed.toList();
                 return Column(
                   children: [
                     SizedBox(
@@ -70,7 +70,6 @@ class _BlogState extends State<Blog> {
                       child: ListView.builder(
                         padding: EdgeInsets.only(top: size.height * 0.02),
                         itemCount: blogs.length,
-                        reverse: true,
                         itemBuilder: (context, index) {
                           return Card(
                             margin: EdgeInsets.symmetric(

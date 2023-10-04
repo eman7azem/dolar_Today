@@ -3,6 +3,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 
 class AdMobService {
+
+  static bool isRewardedShowed = false;
+
   static String get bannerAdUnitId {
     return 'ca-app-pub-6848148437732539/7202509694';
   }

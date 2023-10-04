@@ -97,6 +97,38 @@ class _GoldState extends State<Gold> {
                               ],
                             ),
                           ),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF124C6C), Color(0xFF2378A8)],
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                            height: size.height * 0.09,
+                            width: double.infinity,
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'اخر تحديث',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20),
+                                ),
+                                Text(
+                                  '${convertToString(golds.first.lastUpdate)}',
+
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+
+
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.symmetric(
@@ -107,12 +139,12 @@ class _GoldState extends State<Gold> {
                                 itemBuilder: (context, index) {
                                   final goldModel = golds[index];
                                   return Container(
+                                    height: size.height*0.19,
                                     padding: EdgeInsets.all(10),
                                     margin: EdgeInsets.only(
-                                      top: size.width * 0.03,
-                                      left: size.width * 0.01,
-                                      right: size.width * 0.01,
-                                    ),
+                                        top: size.width * 0.03,
+                                        left: size.width * 0.01,
+                                        right: size.width * 0.01),
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
@@ -128,105 +160,223 @@ class _GoldState extends State<Gold> {
                                     ),
                                     child: Column(
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  height: 35,
-                                                  goldImage[index],
-                                                ),
-                                                Text(
-                                                  text[index],
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Text(
-                                                      'شراء',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'شراء',
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                        fontWeight: FontWeight.bold
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${goldModel.price}',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize:
-                                                            18, // Set an initial font size
-                                                          ),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        '${goldModel.price}',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize:
+                                                          18, // Set an initial font size
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(width: size.width * 0.08,),
-                                                Column(
-                                                  children: [
-                                                    Text(
-                                                      'بيع',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
                                                       ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    height: 35,
+                                                    goldImage[index],
+                                                  ),
+                                                  Text(
+                                                    text[index],
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                        FontWeight.w700,
+                                                        fontSize: 18),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'بيع',
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${goldModel.sell}',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 18,
-                                                          ),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        '${goldModel.sell}',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        SizedBox(
-                                          height: size.height * 0.03,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'اخر تحديث',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              '${convertToString(goldModel.lastUpdate)}',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                          ],
-                                        ),
+
                                       ],
                                     ),
                                   );
+
                                 },
                               ),
                             ),
                           ),
+
+
+
+
+
+
+                          // Expanded(
+                          //   child: Container(
+                          //     margin: EdgeInsets.symmetric(
+                          //       horizontal: size.width * 0.04,
+                          //     ),
+                          //     child: ListView.builder(
+                          //       itemCount: goldImage.length,
+                          //       itemBuilder: (context, index) {
+                          //         final goldModel = golds[index];
+                          //         return Container(
+                          //           padding: EdgeInsets.all(10),
+                          //           margin: EdgeInsets.only(
+                          //             top: size.width * 0.03,
+                          //             left: size.width * 0.01,
+                          //             right: size.width * 0.01,
+                          //           ),
+                          //           width: double.infinity,
+                          //           decoration: BoxDecoration(
+                          //             color: Colors.white,
+                          //             boxShadow: [
+                          //               BoxShadow(
+                          //                 color: Colors.grey.withOpacity(0.4),
+                          //                 spreadRadius: 1,
+                          //                 blurRadius: 2,
+                          //                 offset: Offset(0, 1),
+                          //               ),
+                          //             ],
+                          //             borderRadius: BorderRadius.circular(10),
+                          //           ),
+                          //           child: Column(
+                          //             children: [
+                          //               Row(
+                          //                 mainAxisAlignment:
+                          //                     MainAxisAlignment.spaceBetween,
+                          //                 children: [
+                          //                   Row(
+                          //                     children: [
+                          //                       Image.asset(
+                          //                         height: 35,
+                          //                         goldImage[index],
+                          //                       ),
+                          //                       Text(
+                          //                         text[index],
+                          //                         style: TextStyle(
+                          //                             fontWeight:
+                          //                                 FontWeight.w700,
+                          //                             fontSize: 18),
+                          //                       ),
+                          //                     ],
+                          //                   ),
+                          //                   Row(
+                          //                     children: [
+                          //                       Column(
+                          //                         children: [
+                          //                           Text(
+                          //                             'شراء',
+                          //                             style: TextStyle(
+                          //                               fontSize: 18,
+                          //                             ),
+                          //                           ),
+                          //                           Row(
+                          //                             children: [
+                          //                               Text(
+                          //                                 '${goldModel.price}',
+                          //                                 style: TextStyle(
+                          //                                   color: Colors.black,
+                          //                                   fontSize:
+                          //                                   18, // Set an initial font size
+                          //                                 ),
+                          //                               ),
+                          //                             ],
+                          //                           ),
+                          //                         ],
+                          //                       ),
+                          //                       SizedBox(width: size.width * 0.03,),
+                          //                       Column(
+                          //                         children: [
+                          //                           Text(
+                          //                             'بيع',
+                          //                             style: TextStyle(
+                          //                               fontSize: 18,
+                          //                             ),
+                          //                           ),
+                          //                           Row(
+                          //                             children: [
+                          //                               Text(
+                          //                                 '${goldModel.sell}',
+                          //                                 style: TextStyle(
+                          //                                   color: Colors.black,
+                          //                                   fontSize: 18,
+                          //                                 ),
+                          //                               ),
+                          //                             ],
+                          //                           ),
+                          //                         ],
+                          //                       ),
+                          //                     ],
+                          //                   ),
+                          //                 ],
+                          //               ),
+                          //               SizedBox(
+                          //                 height: size.height * 0.03,
+                          //               ),
+                          //               Row(
+                          //                 mainAxisAlignment:
+                          //                     MainAxisAlignment.spaceBetween,
+                          //                 children: [
+                          //                   Text(
+                          //                     'اخر تحديث',
+                          //                     style: TextStyle(
+                          //                         color: Colors.black,
+                          //                         fontSize: 18,
+                          //                         fontWeight: FontWeight.w600),
+                          //                   ),
+                          //                   Text(
+                          //                     '${convertToString(goldModel.lastUpdate)}',
+                          //                     style: TextStyle(
+                          //                         color: Colors.black,
+                          //                         fontSize: 18,
+                          //                         fontWeight: FontWeight.w600),
+                          //                   ),
+                          //                 ],
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       );
                     }
