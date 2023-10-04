@@ -9,6 +9,27 @@ import '../models/currency_data.dart';
 class API {
   final String baseUrl = 'https://alamana-sa.online/api';
 
+  Future<String?> getVersion() async {
+    final url = '$baseUrl/version';
+    String? version;
+    try {
+      final dio = Dio();
+
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        version = response.data['value'].toString(); // Assuming 'value' is the key in the JSON response.
+        print("Version: $version");
+      } else {
+        // Handle non-200 status code as needed.
+        print("========== ${response.statusCode}");
+      }
+    } catch (e, stackTrace) {
+      print('========== Error: $e');
+      print('========== Error Stack Trace: $stackTrace');
+    }
+    return version;
+  }
+
   Future<BankData?> banks() async {
     final url = '$baseUrl/banks';
     BankData? data;

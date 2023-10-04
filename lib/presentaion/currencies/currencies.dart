@@ -7,8 +7,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../API/api.dart';
 import '../../models/bank.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../service/admob_services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 
 class Currencies extends StatefulWidget {
@@ -26,6 +29,19 @@ class _CurrenciesState extends State<Currencies> {
   void initState() {
     super.initState();
     _createRewardAd();
+    _checkAppVersion();
+
+  }
+
+
+  void _checkAppVersion() async {
+    final currentVersion = await getAppVersion();
+    final latestVersion = await _api.getVersion(); // Use the API method you created.
+
+    if (latestVersion != null && latestVersion != currentVersion) {
+      // Show the update dialog.
+      showUpdateDialog(context);
+    }
   }
 
   List<String> imagesLogo = [
@@ -42,6 +58,10 @@ class _CurrenciesState extends State<Currencies> {
   bool isLike = false;
   final _api = API();
 
+  Future<String> getAppVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +75,6 @@ class _CurrenciesState extends State<Currencies> {
               onRefresh: () async {
                 setState(() {
                 });
-                _createRewardAd();
               },
               child: FutureBuilder(
                   future: _api.banks(),
@@ -253,6 +272,8 @@ class _CurrenciesState extends State<Currencies> {
         ));
   }
 
+
+
   void _createRewardAd() {
     RewardedAd.load(
         adUnitId: AdMobService.rewardAdUnitId,
@@ -273,6 +294,15 @@ class _CurrenciesState extends State<Currencies> {
     if(_rewardedAd != null){
       _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
           onAdDismissedFullScreenContent: (ad){
+            Fluttertoast.showToast(
+                msg: "شكرًا لدعمكم ومشاركتكم في مشاهدة الإعلانات، إنها الوسيلة الوحيدة لنا لضمان استمرارية التطبيق وتحسين دقة البيانات. نقدر دعمكم وثقتكم بنا!",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.SNACKBAR,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Color(0xFF2378A8),
+                textColor: Colors.white,
+                fontSize: 16.0,
+            );
             ad.dispose();
             _createRewardAd();
           },
@@ -281,8 +311,45 @@ class _CurrenciesState extends State<Currencies> {
             _createRewardAd();
           }
       );
-      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {});
+      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+
+      });
       _rewardedAd = null;
+    }
+  }
+
+  void showUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('تحديث الآن'),
+          content: Text('برجاء تنزيل التحديث الآن'),
+          actions: <Widget>[
+            TextButton(
+              child: Center(child: Text('لاحقاً')),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Center(child: Text('تحديث')),
+              onPressed: () {
+                Navigator.of(context).pop();
+                launchUpdateURL('https://play.google.com/store/apps/details?id=com.athr.dolar_today');
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void launchUpdateURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 
