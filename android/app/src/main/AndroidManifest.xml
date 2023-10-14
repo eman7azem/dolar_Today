@@ -49,7 +49,7 @@
             android:value="custom_notification_channel_id" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6848148437732539~6474051260"/>
+            android:value="ca-app-pub-1927974795737593~8690413819"/>
 
     </application>
 </manifest>

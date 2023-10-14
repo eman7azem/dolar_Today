@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dolar_today/models/gold.dart';
 import 'package:dolar_today/service/admob_services.dart';
 import 'package:dolar_today/utils/date_time.dart';
@@ -5,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../API/api.dart';
 import '../../constants/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Gold extends StatefulWidget {
   const Gold({super.key});
@@ -14,6 +19,10 @@ class Gold extends StatefulWidget {
 }
 
 class _GoldState extends State<Gold> {
+
+  RewardedInterstitialAd? _rewardedInterstitialAd;
+  Timer? _timer;
+
   List<String> goldImage = [
     'assets/images/gold.png',
     'assets/images/gold.png',
@@ -40,6 +49,68 @@ class _GoldState extends State<Gold> {
   @override
   void initState() {
     super.initState();
+    _adTimer();
+  }
+
+  bool isThreeMinutesPassed(String? lastAdTimeStr) {
+    if (lastAdTimeStr == null) {
+      return true;
+    }
+
+    final lastAdTime = DateTime.parse(lastAdTimeStr);
+    final now = DateTime.now();
+
+    final difference = now.difference(lastAdTime);
+    return difference.inMinutes >= 1;
+  }
+
+  void _loadInterstitialRewardedAd() {
+    RewardedInterstitialAd.load(
+      adUnitId: AdMobService.rewardInterstitialUnitId,
+      request: AdRequest(),
+      rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _rewardedInterstitialAd = ad;
+          _showInterstitialRewardedAd();
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          debugPrint('RewardedInterstitialAd failed to load: $error');
+        },
+      ),
+    );
+  }
+
+  void _showInterstitialRewardedAd() {
+    _rewardedInterstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        Fluttertoast.showToast(
+          msg:
+          "شكرًا لدعمكم ومشاركتكم في مشاهدة الإعلانات، إنها الوسيلة الوحيدة لنا لضمان استمرارية التطبيق وتحسين دقة البيانات. نقدر دعمكم وثقتكم بنا!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color(0xFF2378A8),
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        print('Interstitial ad failed to show: $error');
+      },
+    );
+    _rewardedInterstitialAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {  });
+  }
+
+  void _adTimer() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if(isThreeMinutesPassed(prefs.getString('lastAdTime'))){
+        final String currentTimestamp = DateTime.now().toIso8601String();
+        prefs.setString('lastAdTime', currentTimestamp);
+        _loadInterstitialRewardedAd();
+      }
+    });
   }
 
   @override

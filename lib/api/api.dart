@@ -37,6 +37,7 @@ class API {
       final dio = Dio();
 
       final response = await dio.get(url);
+      dio.options.connectTimeout = Duration(seconds: 30);
       if (response.statusCode == 200) {
         data = BankData.fromJson(response.data);
         print("bank ${data.average.sell}");
