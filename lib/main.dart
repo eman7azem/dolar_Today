@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'API/api.dart';
 import 'fcm_service.dart';
 import 'presentaion/bottomBar/bottomBar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../service/admob_services.dart';
+
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +32,12 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdReady = false;
+
+  RewardedAd? _rewardedAd;
+  final _api = API();
 
   @override
   void initState() {
@@ -44,7 +53,21 @@ class _MyAppState extends State<MyApp> {
 
     messaging.subscribeToTopic("all");
 
+    WidgetsBinding.instance.addObserver(this);
+    _createRewardAd();
+    Future.delayed(Duration(seconds: 10), () {
+      _showRewardedAd();
+    });
+
   }
+
+  void _startRepeatingTimer() {
+    // Set up a timer to repeat every 10 minutes
+    Timer.periodic(Duration(minutes: 5), (timer) {
+      _loadInterstitialAd();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,4 +81,84 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  void _showRewardedAd() {
+    if (_rewardedAd != null) {
+      _rewardedAd!.fullScreenContentCallback =
+          FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
+            Fluttertoast.showToast(
+              msg:
+              "شكرًا لدعمكم ومشاركتكم في مشاهدة الإعلانات، إنها الوسيلة الوحيدة لنا لضمان استمرارية التطبيق وتحسين دقة البيانات. نقدر دعمكم وثقتكم بنا!",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Color(0xFF2378A8),
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+            ad.dispose();
+            _createRewardAd();
+          }, onAdFailedToShowFullScreenContent: (ad, error) {
+            ad.dispose();
+            _createRewardAd();
+          });
+      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {});
+      _rewardedAd = null;
+    }
+  }
+
+  void _createRewardAd() {
+    RewardedAd.load(
+        adUnitId: AdMobService.rewardAdUnitId,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad) => _rewardedAd = ad,
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('Add failed to load $error');
+            }));
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AdMobService.isRewardedShowed = false;
+    super.dispose();
+  }
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdMobService.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            _interstitialAd = ad;
+            _isInterstitialAdReady = true;
+          }, onAdFailedToLoad: (LoadAdError error) {
+
+      }
+      ),
+    );
+  }
+
+  void _showInterstitialAd() {
+    if (_isInterstitialAdReady) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          print('Interstitial ad failed to show: $error');
+
+        },
+      );
+      _interstitialAd!.show();
+    } else {
+      print('Interstitial ad is not ready yet.');
+    }
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+
+  }
 }

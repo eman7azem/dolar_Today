@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:dolar_today/constants/navigator.dart';
 import 'package:dolar_today/models/bank_data.dart';
 import 'package:dolar_today/presentaion/bank_page/bank_page.dart';
@@ -6,13 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../API/api.dart';
 import '../../models/bank.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../service/admob_services.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
+import 'package:package_info_plus/package_info_plus.dart';
 
 class Currencies extends StatefulWidget {
   const Currencies({super.key});
@@ -22,25 +21,58 @@ class Currencies extends StatefulWidget {
 }
 
 class _CurrenciesState extends State<Currencies> {
-  RewardedAd? _rewardedAd;
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdReady = false;
+  Timer? _timer;
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-    _createRewardAd();
     _checkAppVersion();
+  }
 
+  void _startRepeatingTimer() {
+    // Set up a timer to repeat every 10 minutes
+    _timer = Timer.periodic(Duration(minutes: 3), (timer) {
+      _loadInterstitialAd();
+    });
   }
 
 
-  void _checkAppVersion() async {
-    final currentVersion = await getAppVersion();
-    final latestVersion = await _api.getVersion(); // Use the API method you created.
 
-    if (latestVersion != null && latestVersion != currentVersion) {
-      // Show the update dialog.
-      showUpdateDialog(context);
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdMobService.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            _interstitialAd = ad;
+            _isInterstitialAdReady = true;
+            _showInterstitialAd();
+          }, onAdFailedToLoad: (LoadAdError error) {
+
+      }
+      ),
+    );
+  }
+
+  void _showInterstitialAd() {
+    if (_isInterstitialAdReady) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          print('Interstitial ad failed to show: $error');
+        },
+      );
+      _interstitialAd!.show();
+    } else {
+      print('Interstitial ad is not ready yet.');
     }
   }
 
@@ -58,11 +90,6 @@ class _CurrenciesState extends State<Currencies> {
   bool isLike = false;
   final _api = API();
 
-  Future<String> getAppVersion() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version;
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -73,8 +100,7 @@ class _CurrenciesState extends State<Currencies> {
           body: SafeArea(
             child: RefreshIndicator(
               onRefresh: () async {
-                setState(() {
-                });
+                setState(() {});
               },
               child: FutureBuilder(
                   future: _api.banks(),
@@ -120,27 +146,31 @@ class _CurrenciesState extends State<Currencies> {
                             Container(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Color(0xFF124C6C), Color(0xFF2378A8)],
+                                  colors: [
+                                    Color(0xFF124C6C),
+                                    Color(0xFF2378A8)
+                                  ],
                                   begin: Alignment.centerRight,
                                   end: Alignment.centerLeft,
                                 ),
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.03),
                               height: size.height * 0.09,
                               width: double.infinity,
-                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'اخر تحديث',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20),
+                                        color: Colors.white, fontSize: 20),
                                   ),
                                   Text(
                                     convertToString(bankData.lastUpdate),
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18),
+                                        color: Colors.white, fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -154,7 +184,7 @@ class _CurrenciesState extends State<Currencies> {
                                   itemCount: bankData.banks.length,
                                   itemBuilder: (context, index) {
                                     Bank bank = bankData.banks[index];
-                                    return GestureDetector(
+                                    return  GestureDetector(
                                       onTap: () {
                                         navigateTo(
                                             context,
@@ -163,7 +193,7 @@ class _CurrenciesState extends State<Currencies> {
                                             ));
                                       },
                                       child: Container(
-                                        height: size.height*0.19,
+                                        height: size.height * 0.19,
                                         padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(
                                             top: size.width * 0.03,
@@ -174,13 +204,15 @@ class _CurrenciesState extends State<Currencies> {
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.grey.withOpacity(0.4),
+                                              color:
+                                              Colors.grey.withOpacity(0.4),
                                               spreadRadius: 1,
                                               blurRadius: 2,
                                               offset: Offset(0, 1),
                                             ),
                                           ],
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                          BorderRadius.circular(10),
                                         ),
                                         child: Column(
                                           children: [
@@ -210,7 +242,8 @@ class _CurrenciesState extends State<Currencies> {
                                                           Text(
                                                             '${bank.dollarPurchaseRate}',
                                                             style: TextStyle(
-                                                              color: Colors.black,
+                                                              color:
+                                                              Colors.black,
                                                               fontSize:
                                                               18, // Set an initial font size
                                                             ),
@@ -240,7 +273,8 @@ class _CurrenciesState extends State<Currencies> {
                                                           Text(
                                                             '${bank.dollarSellRate}',
                                                             style: TextStyle(
-                                                              color: Colors.black,
+                                                              color:
+                                                              Colors.black,
                                                               fontSize: 18,
                                                             ),
                                                           ),
@@ -255,7 +289,6 @@ class _CurrenciesState extends State<Currencies> {
                                         ),
                                       ),
                                     );
-
                                   },
                                 ),
                               ),
@@ -273,48 +306,16 @@ class _CurrenciesState extends State<Currencies> {
   }
 
 
+  void _checkAppVersion() async {
+    final currentVersion = await getAppVersion();
+    final latestVersion =
+    await _api.getVersion(); // Use the API method you created.
 
-  void _createRewardAd() {
-    RewardedAd.load(
-        adUnitId: AdMobService.rewardAdUnitId,
-        request: const AdRequest(),
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-            onAdLoaded: (ad) => setState(() {
-              _rewardedAd = ad;
-              if(!AdMobService.isRewardedShowed){
-                _showRewardedAd();
-              }
-              AdMobService.isRewardedShowed = true;
-            }),
-            onAdFailedToLoad: (LoadAdError error) {
-              debugPrint('Add failed to load $error');
-            }));
-  }
-  void _showRewardedAd(){
-    if(_rewardedAd != null){
-      _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-          onAdDismissedFullScreenContent: (ad){
-            Fluttertoast.showToast(
-                msg: "شكرًا لدعمكم ومشاركتكم في مشاهدة الإعلانات، إنها الوسيلة الوحيدة لنا لضمان استمرارية التطبيق وتحسين دقة البيانات. نقدر دعمكم وثقتكم بنا!",
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.SNACKBAR,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Color(0xFF2378A8),
-                textColor: Colors.white,
-                fontSize: 16.0,
-            );
-            ad.dispose();
-            _createRewardAd();
-          },
-          onAdFailedToShowFullScreenContent: (ad, error){
-            ad.dispose();
-            _createRewardAd();
-          }
-      );
-      _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
-
-      });
-      _rewardedAd = null;
+    print(
+        "Current version is ${currentVersion}, last version is ${latestVersion}");
+    if (latestVersion != null && latestVersion != currentVersion) {
+      // Show the update dialog.
+      showUpdateDialog(context);
     }
   }
 
@@ -336,7 +337,8 @@ class _CurrenciesState extends State<Currencies> {
               child: Center(child: Text('تحديث')),
               onPressed: () {
                 Navigator.of(context).pop();
-                launchUpdateURL('https://play.google.com/store/apps/details?id=com.athr.dolar_today');
+                launchUpdateURL(
+                    'https://play.google.com/store/apps/details?id=com.athr.dolar_today');
               },
             ),
           ],
@@ -345,6 +347,7 @@ class _CurrenciesState extends State<Currencies> {
     );
   }
 
+
   void launchUpdateURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -352,5 +355,8 @@ class _CurrenciesState extends State<Currencies> {
       throw 'Could not launch $url';
     }
   }
-
+  Future<String> getAppVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 }

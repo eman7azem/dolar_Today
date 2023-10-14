@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dolar_today/utils/date_time.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +23,8 @@ class BankPage extends StatefulWidget {
 class _BankPageState extends State<BankPage> {
   final _api = API();
   BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdReady = false;
 
   List<String> imagesLogo = [
     'assets/images/black_souq.png',
@@ -37,6 +41,44 @@ class _BankPageState extends State<BankPage> {
   void initState() {
     super.initState();
     _createBannerId();
+  }
+
+  void _startRepeatingTimer() {
+    // Set up a timer to repeat every 10 minutes
+    Timer.periodic(Duration(minutes: 3), (timer) {
+      _loadInterstitialAd();
+    });
+  }
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdMobService.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            _interstitialAd = ad;
+            _isInterstitialAdReady = true;
+            _showInterstitialAd();
+          }, onAdFailedToLoad: (LoadAdError error) {
+
+      }
+      ),
+    );
+  }
+
+  void _showInterstitialAd() {
+    if (_isInterstitialAdReady) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          print('Interstitial ad failed to show: $error');
+        },
+      );
+      _interstitialAd!.show();
+    } else {
+      print('Interstitial ad is not ready yet.');
+    }
   }
 
   @override
