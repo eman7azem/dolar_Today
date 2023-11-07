@@ -7,11 +7,13 @@ class AdMobService {
   static bool isRewardedShowed = false;
 
   static String get bannerAdUnitId {
-    return 'ca-app-pub-1927974795737593/3705680446';
+    return 'ca-app-pub-1927974795737593/8054089182';
   }
+
   static String get interstitialAdUnitId {
-    return 'ca-app-pub-6848148437732539/5983639245';
+    return 'ca-app-pub-1927974795737593~8690413819';
   }
+
   static String get rewardAdUnitId {
     return 'ca-app-pub-1927974795737593/1877593453';
   }
@@ -27,4 +29,5 @@ class AdMobService {
       debugPrint('Ad failed to load: $error');
     }
   );
+
 }

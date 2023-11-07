@@ -26,7 +26,7 @@ class _BlogState extends State<Blog> {
   @override
   void initState() {
     super.initState();
-    _adTimer();
+   // _adTimer();
   }
 
   bool isThreeMinutesPassed(String? lastAdTimeStr) {
@@ -38,7 +38,7 @@ class _BlogState extends State<Blog> {
     final now = DateTime.now();
 
     final difference = now.difference(lastAdTime);
-    return difference.inMinutes >= 1;
+    return difference.inMinutes >= 2;
   }
 
   void _loadInterstitialRewardedAd() {

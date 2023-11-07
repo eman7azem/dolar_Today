@@ -49,7 +49,7 @@ class _GoldState extends State<Gold> {
   @override
   void initState() {
     super.initState();
-    _adTimer();
+    //_adTimer();
   }
 
   bool isThreeMinutesPassed(String? lastAdTimeStr) {
@@ -61,7 +61,7 @@ class _GoldState extends State<Gold> {
     final now = DateTime.now();
 
     final difference = now.difference(lastAdTime);
-    return difference.inMinutes >= 1;
+    return difference.inMinutes >= 2;
   }
 
   void _loadInterstitialRewardedAd() {

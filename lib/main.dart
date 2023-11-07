@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     messaging.subscribeToTopic("all");
 
     WidgetsBinding.instance.addObserver(this);
-    _loadInterstitialRewardedAd();
+    _loadInterstitialAd();
     _shared();
   }
 
@@ -165,6 +165,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           onAdLoaded: (ad) {
             _interstitialAd = ad;
             _isInterstitialAdReady = true;
+            _showInterstitialAd();
           },
           onAdFailedToLoad: (LoadAdError error) {}),
     );

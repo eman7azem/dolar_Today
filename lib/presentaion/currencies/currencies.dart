@@ -36,7 +36,7 @@ class _CurrenciesState extends State<Currencies> {
   void initState() {
     super.initState();
     _checkAppVersion();
-    _adTimer();
+    //_adTimer();
   }
 
   bool isThreeMinutesPassed(String? lastAdTimeStr) {
@@ -48,7 +48,7 @@ class _CurrenciesState extends State<Currencies> {
     final now = DateTime.now();
 
     final difference = now.difference(lastAdTime);
-    return difference.inMinutes >= 1;
+    return difference.inMinutes >= 2;
   }
 
   void _loadInterstitialRewardedAd() {
