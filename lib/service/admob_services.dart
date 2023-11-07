@@ -11,7 +11,7 @@ class AdMobService {
   }
 
   static String get interstitialAdUnitId {
-    return 'ca-app-pub-1927974795737593~8690413819';
+    return 'ca-app-pub-1927974795737593/9828163255';
   }
 
   static String get rewardAdUnitId {
