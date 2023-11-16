@@ -317,7 +317,7 @@ class _CurrenciesState extends State<Currencies> {
                                                     ],
                                                   ),
                                                   Text(
-                                                    '${bank.name}',
+                                                    bank.name == "السوق السوداء"? "سعر السوق" : bank.name,
                                                     style: TextStyle(
                                                         fontWeight:
                                                         FontWeight.w700,
